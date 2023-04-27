@@ -21,7 +21,7 @@ public class DAO {
                 + "(SELECT idUsuario FROM usuario WHERE nombre =  ?  );";
         ResultSet resultado = null;
         try (Connection conexion = DriverManager.getConnection(
-                "jdbc:mysql://192.168.109.08:3306/proyectofinal", usuario, contraseña); PreparedStatement ps = conexion.prepareStatement(consulta)) {
+                "jdbc:mysql://192.168.109.08:3306/proyectofinal", this.usuario, this.contraseña); PreparedStatement ps = conexion.prepareStatement(consulta)) {
 
             ps.setString(1, nombreUsuario);
             resultado = ps.executeQuery();
@@ -36,6 +36,33 @@ public class DAO {
     }
 
     public boolean inicioSesión(String nombreUsuario, String contraseña) {
+
+        String consulta
+                = "SELECT contrasena FROM usuario WHERE nombre = ?";
+        ResultSet resultado = null;
+        String contraseñaBD = "";
+        try (Connection conexion = DriverManager.getConnection(
+                "jdbc:mysql://192.168.109.08:3306/proyectofinal", this.usuario, this.contraseña); PreparedStatement ps = conexion.prepareStatement(consulta)) {
+
+            ps.setString(1, nombreUsuario);
+            resultado = ps.executeQuery();
+
+            if (resultado.next()) {
+                contraseñaBD = resultado.getString(1);
+            } else {
+                return false;
+            }
+
+            if (Hash.calcularHash(contraseña).equals(contraseñaBD)) {
+                return true;
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Código de Error: " + e.getErrorCode()
+                    + "\nSLQState: " + e.getSQLState()
+                    + "\nMensaje: " + e.getMessage());
+        }
+
         return true;
     }
 
@@ -43,8 +70,9 @@ public class DAO {
         String consulta = "INSERT INTO usuario ( nombre, contrasena, correo, fechaNacimiento ) values (?, ?, ?, ?);";
         int resultado = 0;
         String newContraseña = Hash.calcularHash(this.contraseña);
+
         try (Connection conexion = DriverManager.getConnection(
-                "jdbc:mysql://192.168.109.08:3306/proyectofinal", usuario, contraseña); PreparedStatement ps = conexion.prepareStatement(consulta)) {
+                "jdbc:mysql://192.168.109.08:3306/proyectofinal", this.usuario, this.contraseña); PreparedStatement ps = conexion.prepareStatement(consulta)) {
 
             ps.setString(1, nombreUsuario);
             ps.setString(2, newContraseña);
@@ -58,7 +86,30 @@ public class DAO {
                     + "\nSLQState: " + e.getSQLState()
                     + "\nMensaje: " + e.getMessage());
         }
-        
+
         return (resultado == 1);
+    }
+
+    public String getTipoUsuario(String nombreUsuario) {
+        String consulta = "SELECT tipoUsuario FROM usuario WHERE nombre = ?;";
+        ResultSet resultado = null;
+        String tipoUsuario = "";
+        try (Connection conexion = DriverManager.getConnection(
+                "jdbc:mysql://192.168.109.08:3306/proyectofinal", this.usuario, this.contraseña); PreparedStatement ps = conexion.prepareStatement(consulta)) {
+
+            ps.setString(1, nombreUsuario);
+            resultado = ps.executeQuery();
+            
+            if ( resultado.next() ) {
+                tipoUsuario = resultado.getString(1);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Código de Error: " + e.getErrorCode()
+                    + "\nSLQState: " + e.getSQLState()
+                    + "\nMensaje: " + e.getMessage());
+        }
+        
+        return tipoUsuario;
     }
 }
