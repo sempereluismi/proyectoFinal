@@ -57,17 +57,22 @@
                           <Group type="102" attributes="0">
                               <Component id="botonCrear" min="-2" pref="167" max="-2" attributes="0"/>
                               <EmptySpace pref="54" max="32767" attributes="0"/>
-                              <Component id="botonLista" min="-2" pref="198" max="-2" attributes="0"/>
+                              <Component id="iniciarSesión" min="-2" pref="198" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="usuario" min="-2" max="-2" attributes="0"/>
                                   <Component id="contra" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="textoUsuario" alignment="1" min="-2" pref="198" max="-2" attributes="0"/>
-                                  <Component id="textoContra" alignment="1" min="-2" pref="198" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace pref="137" max="32767" attributes="0"/>
+                                      <Component id="textoUsuario" min="-2" pref="198" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="137" max="-2" attributes="0"/>
+                                      <Component id="inicioPassword" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                       </Group>
@@ -93,14 +98,14 @@
                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="contra" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="textoContra" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="inicioPassword" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="botonLista" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="iniciarSesión" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="botonCrear" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="77" max="32767" attributes="0"/>
+                      <EmptySpace pref="79" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -135,14 +140,12 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textoUsuarioActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JPasswordField" name="textoContra">
-            </Component>
-            <Component class="javax.swing.JButton" name="botonLista">
+            <Component class="javax.swing.JButton" name="iniciarSesi&#xf3;n">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Acceder a tu lista"/>
+                <Property name="text" type="java.lang.String" value="Iniciar Sesi&#xf3;n"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonListaActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="iniciarSesi&#xf3;nActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="botonCrear">
@@ -151,6 +154,11 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonCrearActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JPasswordField" name="inicioPassword">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inicioPasswordActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
@@ -172,20 +180,13 @@
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="33" pref="277" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="textoCorreo" alignment="1" min="-2" pref="195" max="-2" attributes="0"/>
-                                  <Component id="textoContra1" alignment="1" min="-2" pref="195" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Component id="labelUsuario" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="textoUsuario1" min="-2" pref="195" max="-2" attributes="0"/>
+                                      <EmptySpace pref="160" max="32767" attributes="0"/>
+                                      <Component id="crearNombreUsuario" min="-2" pref="195" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
@@ -198,10 +199,17 @@
                                       <Component id="labelFecha" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="textoFecha" pref="195" max="32767" attributes="0"/>
-                                          <Component id="botonInicio" max="32767" attributes="0"/>
+                                          <Component id="crearFechaNacimiento" pref="195" max="32767" attributes="0"/>
+                                          <Component id="crearCuenta" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
+                              </Group>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="crearCorreo" alignment="1" min="-2" pref="195" max="-2" attributes="0"/>
+                                  <Component id="crearContraseña" min="-2" pref="195" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -217,25 +225,25 @@
                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="labelUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="textoUsuario1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="crearNombreUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="labelContra" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="textoContra1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="crearContraseña" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="labelCorreo" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="textoCorreo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="crearCorreo" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="labelFecha" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="textoFecha" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="crearFechaNacimiento" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="botonInicio" min="-2" max="-2" attributes="0"/>
+                      <Component id="crearCuenta" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="12" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -250,9 +258,9 @@
                 <Property name="text" type="java.lang.String" value="Usuario"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="textoUsuario1">
+            <Component class="javax.swing.JTextField" name="crearNombreUsuario">
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textoUsuario1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="crearNombreUsuarioActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="labelContra">
@@ -271,11 +279,6 @@
                 <Property name="text" type="java.lang.String" value="Correo"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="textoContra1">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textoContra1ActionPerformed"/>
-              </Events>
-            </Component>
             <Component class="javax.swing.JLabel" name="labelFecha">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -284,14 +287,17 @@
                 <Property name="text" type="java.lang.String" value="fechaNacimiento"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="textoCorreo">
+            <Component class="javax.swing.JTextField" name="crearCorreo">
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textoCorreoActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="crearCorreoActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="textoFecha">
+            <Component class="javax.swing.JTextField" name="crearFechaNacimiento">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="aaaa-mm-dd"/>
+              </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textoFechaActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="crearFechaNacimientoActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="titulo1">
@@ -302,13 +308,15 @@
                 <Property name="text" type="java.lang.String" value="Crear Cuenta de Usuario"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="botonInicio">
+            <Component class="javax.swing.JButton" name="crearCuenta">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Iniciar Sesi&#xf3;n"/>
+                <Property name="text" type="java.lang.String" value="Crear cuenta"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonInicioActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="crearCuentaActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JPasswordField" name="crearContrase&#xf1;a">
             </Component>
           </SubComponents>
         </Container>
