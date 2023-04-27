@@ -23,12 +23,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="titulo" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
@@ -36,39 +31,43 @@
                           <Component id="labelCorreo" min="-2" max="-2" attributes="0"/>
                           <Component id="labelFecha" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="textoFecha" alignment="1" min="-2" pref="195" max="-2" attributes="0"/>
-                          <Component id="textoCorreo" alignment="1" min="-2" pref="195" max="-2" attributes="0"/>
+                          <Component id="textoCorreo" min="-2" pref="195" max="-2" attributes="0"/>
+                          <Component id="textoFecha" min="-2" pref="195" max="-2" attributes="0"/>
+                          <Component id="botonCrear" alignment="0" min="-2" pref="195" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="99" max="32767" attributes="0"/>
+                      <Component id="titulo" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="labelUsuario" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="labelContra" min="-2" max="-2" attributes="0"/>
+                          <Component id="labelUsuario" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
                               <Component id="textoUsuario" min="-2" pref="195" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="labelContra" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
-                              <Component id="textoContra" min="-2" pref="195" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="botonCrear" min="-2" pref="195" max="-2" attributes="0"/>
+                          <Component id="textoContra" alignment="0" min="-2" pref="195" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               <Component id="titulo" min="-2" pref="37" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="labelUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="textoUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -79,18 +78,18 @@
                   <Component id="textoContra" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="labelCorreo" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="textoCorreo" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="labelCorreo" min="-2" max="-2" attributes="0"/>
+                  <Component id="textoCorreo" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="labelFecha" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="labelFecha" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="textoFecha" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="botonCrear" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="21" max="32767" attributes="0"/>
+              <EmptySpace pref="28" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

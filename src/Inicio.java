@@ -1,3 +1,6 @@
+
+import java.awt.CardLayout;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -25,15 +28,32 @@ public class Inicio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panel = new javax.swing.JPanel();
+        panelInicio = new javax.swing.JPanel();
         titulo = new javax.swing.JLabel();
         usuario = new javax.swing.JLabel();
-        textoUsuario = new javax.swing.JTextField();
         contra = new javax.swing.JLabel();
-        botonInicio = new javax.swing.JButton();
-        botonCrear = new javax.swing.JButton();
+        textoUsuario = new javax.swing.JTextField();
         textoContra = new javax.swing.JPasswordField();
+        botonLista = new javax.swing.JButton();
+        botonCrear = new javax.swing.JButton();
+        panelCuenta = new javax.swing.JPanel();
+        labelUsuario = new javax.swing.JLabel();
+        textoUsuario1 = new javax.swing.JTextField();
+        labelContra = new javax.swing.JLabel();
+        labelCorreo = new javax.swing.JLabel();
+        textoContra1 = new javax.swing.JTextField();
+        labelFecha = new javax.swing.JLabel();
+        textoCorreo = new javax.swing.JTextField();
+        textoFecha = new javax.swing.JTextField();
+        titulo1 = new javax.swing.JLabel();
+        botonInicio = new javax.swing.JButton();
+        panelLista = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        panel.setLayout(new java.awt.CardLayout());
 
         titulo.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
         titulo.setText("INICIO DE SESIÓN");
@@ -41,14 +61,114 @@ public class Inicio extends javax.swing.JFrame {
         usuario.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
         usuario.setText("Usuario");
 
+        contra.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        contra.setText("Contraseña");
+
         textoUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textoUsuarioActionPerformed(evt);
             }
         });
 
-        contra.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
-        contra.setText("Contraseña");
+        botonLista.setText("Acceder a tu lista");
+        botonLista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonListaActionPerformed(evt);
+            }
+        });
+
+        botonCrear.setText("Crear Usuario");
+        botonCrear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCrearActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelInicioLayout = new javax.swing.GroupLayout(panelInicio);
+        panelInicio.setLayout(panelInicioLayout);
+        panelInicioLayout.setHorizontalGroup(
+            panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelInicioLayout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addGroup(panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panelInicioLayout.createSequentialGroup()
+                        .addComponent(botonCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                        .addComponent(botonLista, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelInicioLayout.createSequentialGroup()
+                        .addGroup(panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(usuario)
+                            .addComponent(contra))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(textoUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(textoContra, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(31, 31, 31))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelInicioLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(titulo)
+                .addGap(143, 143, 143))
+        );
+        panelInicioLayout.setVerticalGroup(
+            panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelInicioLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(titulo)
+                .addGap(28, 28, 28)
+                .addGroup(panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(usuario)
+                    .addComponent(textoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addGroup(panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(contra)
+                    .addComponent(textoContra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addGroup(panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botonLista)
+                    .addComponent(botonCrear))
+                .addContainerGap(77, Short.MAX_VALUE))
+        );
+
+        panel.add(panelInicio, "panelInicio");
+
+        labelUsuario.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        labelUsuario.setText("Usuario");
+
+        textoUsuario1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textoUsuario1ActionPerformed(evt);
+            }
+        });
+
+        labelContra.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        labelContra.setText("Contraseña");
+
+        labelCorreo.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        labelCorreo.setText("Correo");
+
+        textoContra1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textoContra1ActionPerformed(evt);
+            }
+        });
+
+        labelFecha.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
+        labelFecha.setText("fechaNacimiento");
+
+        textoCorreo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textoCorreoActionPerformed(evt);
+            }
+        });
+
+        textoFecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textoFechaActionPerformed(evt);
+            }
+        });
+
+        titulo1.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
+        titulo1.setText("Crear Cuenta de Usuario");
 
         botonInicio.setText("Iniciar Sesión");
         botonInicio.addActionListener(new java.awt.event.ActionListener() {
@@ -57,52 +177,102 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
-        botonCrear.setText("Crear Usuario");
+        javax.swing.GroupLayout panelCuentaLayout = new javax.swing.GroupLayout(panelCuenta);
+        panelCuenta.setLayout(panelCuentaLayout);
+        panelCuentaLayout.setHorizontalGroup(
+            panelCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelCuentaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(titulo1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCuentaLayout.createSequentialGroup()
+                .addGroup(panelCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panelCuentaLayout.createSequentialGroup()
+                        .addGap(33, 277, Short.MAX_VALUE)
+                        .addGroup(panelCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(textoCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(textoContra1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelCuentaLayout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addGroup(panelCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelCuentaLayout.createSequentialGroup()
+                                .addComponent(labelUsuario)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(textoUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelCuentaLayout.createSequentialGroup()
+                                .addGroup(panelCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(labelCorreo)
+                                    .addComponent(labelContra))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCuentaLayout.createSequentialGroup()
+                                .addComponent(labelFecha)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(panelCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(textoFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
+                                    .addComponent(botonInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                .addGap(25, 25, 25))
+        );
+        panelCuentaLayout.setVerticalGroup(
+            panelCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelCuentaLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(titulo1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addGroup(panelCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelUsuario)
+                    .addComponent(textoUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelContra)
+                    .addComponent(textoContra1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelCorreo)
+                    .addComponent(textoCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelFecha)
+                    .addComponent(textoFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(botonInicio)
+                .addContainerGap(12, Short.MAX_VALUE))
+        );
+
+        panel.add(panelCuenta, "panelCuenta");
+
+        jLabel3.setText("jLabel3");
+
+        javax.swing.GroupLayout panelListaLayout = new javax.swing.GroupLayout(panelLista);
+        panelLista.setLayout(panelListaLayout);
+        panelListaLayout.setHorizontalGroup(
+            panelListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelListaLayout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addComponent(jLabel3)
+                .addContainerGap(408, Short.MAX_VALUE))
+        );
+        panelListaLayout.setVerticalGroup(
+            panelListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelListaLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jLabel3)
+                .addContainerGap(241, Short.MAX_VALUE))
+        );
+
+        panel.add(panelLista, "panelLista");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(titulo))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(usuario)
-                                .addGap(43, 43, 43)
-                                .addComponent(textoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(botonCrear)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(botonInicio))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(contra)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(textoContra)))))
-                .addContainerGap(59, Short.MAX_VALUE))
+            .addComponent(panel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(titulo)
-                .addGap(44, 44, 44)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(usuario)
-                    .addComponent(textoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(contra)
-                    .addComponent(textoContra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonInicio)
-                    .addComponent(botonCrear))
-                .addGap(50, 50, 50))
+                .addContainerGap()
+                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         pack();
@@ -113,8 +283,35 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_textoUsuarioActionPerformed
 
     private void botonInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonInicioActionPerformed
-        // TODO add your handling code here:
+        CardLayout card = (CardLayout) panel.getLayout();
+        card.show(panel, "panelInicio");
     }//GEN-LAST:event_botonInicioActionPerformed
+
+    private void botonCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearActionPerformed
+        CardLayout card = (CardLayout) panel.getLayout();
+        card.show(panel, "panelCuenta");
+    }//GEN-LAST:event_botonCrearActionPerformed
+
+    private void textoUsuario1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoUsuario1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textoUsuario1ActionPerformed
+
+    private void textoContra1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoContra1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textoContra1ActionPerformed
+
+    private void textoCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoCorreoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textoCorreoActionPerformed
+
+    private void textoFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoFechaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textoFechaActionPerformed
+
+    private void botonListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonListaActionPerformed
+        CardLayout card = (CardLayout) panel.getLayout();
+        card.show(panel, "panelLista");
+    }//GEN-LAST:event_botonListaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -154,10 +351,25 @@ public class Inicio extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonCrear;
     private javax.swing.JButton botonInicio;
+    private javax.swing.JButton botonLista;
     private javax.swing.JLabel contra;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel labelContra;
+    private javax.swing.JLabel labelCorreo;
+    private javax.swing.JLabel labelFecha;
+    private javax.swing.JLabel labelUsuario;
+    private javax.swing.JPanel panel;
+    private javax.swing.JPanel panelCuenta;
+    private javax.swing.JPanel panelInicio;
+    private javax.swing.JPanel panelLista;
     private javax.swing.JPasswordField textoContra;
+    private javax.swing.JTextField textoContra1;
+    private javax.swing.JTextField textoCorreo;
+    private javax.swing.JTextField textoFecha;
     private javax.swing.JTextField textoUsuario;
+    private javax.swing.JTextField textoUsuario1;
     private javax.swing.JLabel titulo;
+    private javax.swing.JLabel titulo1;
     private javax.swing.JLabel usuario;
     // End of variables declaration//GEN-END:variables
 }
