@@ -27,6 +27,7 @@ public class Inicio extends javax.swing.JFrame {
     DAO conexion = new DAO("LuisMiguel", "Palomitas02");
 
     /* CONTROLADOR */
+
     private boolean insertarUsuario(String nombreUsuario, String contraseña, String correo, String fechaNacimiento) {
         return conexion.crearUsuario(nombreUsuario, contraseña, correo, fechaNacimiento);
     }
@@ -34,8 +35,8 @@ public class Inicio extends javax.swing.JFrame {
     private boolean iniciarSesion(String nombre, String contraseña) {
         return conexion.inicioSesión(nombre, contraseña);
     }
-    
-    private String getTipoUsuario( String nombreUsuario ) {
+
+    private String getTipoUsuario(String nombreUsuario) {
         return conexion.getTipoUsuario(nombreUsuario);
     }
 
@@ -44,9 +45,6 @@ public class Inicio extends javax.swing.JFrame {
         card.show(panel, vista);
     }
 
-    
-    
-    
     /* VISTA */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -75,11 +73,11 @@ public class Inicio extends javax.swing.JFrame {
         panelUsuario = new javax.swing.JPanel();
         UsuarioNombre = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        usuarioCambiarAdmin = new javax.swing.JButton();
         usuarioScrollPanel = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tareasUsuario = new javax.swing.JTable();
+        usuarioCerrarSesion = new javax.swing.JButton();
+        usuarioCambiarAdmin = new javax.swing.JButton();
         panelAdmin = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -142,7 +140,7 @@ public class Inicio extends javax.swing.JFrame {
                                     .addComponent(iniciarPassword)))
                             .addGroup(panelInicioLayout.createSequentialGroup()
                                 .addComponent(botonCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 287, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 289, Short.MAX_VALUE)
                                 .addComponent(iniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(31, 31, 31))))
         );
@@ -151,7 +149,7 @@ public class Inicio extends javax.swing.JFrame {
             .addGroup(panelInicioLayout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addComponent(titulo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
                 .addGroup(panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(usuario)
                     .addComponent(iniciarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -246,7 +244,7 @@ public class Inicio extends javax.swing.JFrame {
                 .addGroup(panelCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(crearContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelContra))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
                 .addGroup(panelCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(crearCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelCorreo))
@@ -270,17 +268,145 @@ public class Inicio extends javax.swing.JFrame {
         jLabel4.setText("TAREAS DE");
         panelUsuario.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
-        usuarioCambiarAdmin.setText("Editar Usuarios");
-        usuarioCambiarAdmin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                usuarioCambiarAdminActionPerformed(evt);
-            }
-        });
-        panelUsuario.add(usuarioCambiarAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 30, -1, -1));
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tareasUsuario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},        {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},        {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},        {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},        {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},        {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},        {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},        {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},        {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},        {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},        {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},        {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},        {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},        {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},        {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},        {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},        {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},        {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},        {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},        {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},        {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},        {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},        {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},        {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},        {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},        {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},        {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},        {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},        {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},        {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},        {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},        {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},        {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},        {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},        {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},        {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},        {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},        {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},        {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},        {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},        {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},        {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},        {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},        {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},        {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null}
@@ -289,29 +415,37 @@ public class Inicio extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        usuarioScrollPanel.setViewportView(jTable1);
+        usuarioScrollPanel.setViewportView(tareasUsuario);
 
-        panelUsuario.add(usuarioScrollPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 680, 270));
+        panelUsuario.add(usuarioScrollPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 680, 270));
+
+        usuarioCerrarSesion.setText("Cerrar Sesión");
+        usuarioCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usuarioCerrarSesionActionPerformed(evt);
+            }
+        });
+        panelUsuario.add(usuarioCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 370, -1, -1));
+
+        usuarioCambiarAdmin.setText("Panel Admin");
+        usuarioCambiarAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usuarioCambiarAdminActionPerformed(evt);
+            }
+        });
+        panelUsuario.add(usuarioCambiarAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 30, -1, -1));
 
         panel.add(panelUsuario, "panelLista");
-
-        jLabel1.setText("PANEL ADMIN");
 
         javax.swing.GroupLayout panelAdminLayout = new javax.swing.GroupLayout(panelAdmin);
         panelAdmin.setLayout(panelAdminLayout);
         panelAdminLayout.setHorizontalGroup(
             panelAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelAdminLayout.createSequentialGroup()
-                .addGap(64, 64, 64)
-                .addComponent(jLabel1)
-                .addContainerGap(571, Short.MAX_VALUE))
+            .addGap(0, 732, Short.MAX_VALUE)
         );
         panelAdminLayout.setVerticalGroup(
             panelAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelAdminLayout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jLabel1)
-                .addContainerGap(313, Short.MAX_VALUE))
+            .addGap(0, 409, Short.MAX_VALUE)
         );
 
         panel.add(panelAdmin, "card5");
@@ -326,8 +460,7 @@ public class Inicio extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -377,6 +510,8 @@ public class Inicio extends javax.swing.JFrame {
             UsuarioNombre.setText(nombre.toUpperCase());
             usuarioCambiarAdmin.setVisible(getTipoUsuario(nombre).equals("administrador"));
             cambiarVista("panelLista");
+            iniciarUsuario.setText("");
+            iniciarPassword.setText("");
         }
 
     }//GEN-LAST:event_iniciarSesionActionPerformed
@@ -385,8 +520,12 @@ public class Inicio extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_iniciarPasswordActionPerformed
 
+    private void usuarioCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarioCerrarSesionActionPerformed
+        cambiarVista("panelInicio");
+    }//GEN-LAST:event_usuarioCerrarSesionActionPerformed
+
     private void usuarioCambiarAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarioCambiarAdminActionPerformed
-        cambiarVista("panelAdmin");
+        cambiarVista("panelInicio");
     }//GEN-LAST:event_usuarioCambiarAdminActionPerformed
 
     /**
@@ -436,9 +575,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JPasswordField iniciarPassword;
     private javax.swing.JButton iniciarSesion;
     private javax.swing.JTextField iniciarUsuario;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel labelContra;
     private javax.swing.JLabel labelCorreo;
     private javax.swing.JLabel labelFecha;
@@ -448,10 +585,12 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JPanel panelCuenta;
     private javax.swing.JPanel panelInicio;
     private javax.swing.JPanel panelUsuario;
+    private javax.swing.JTable tareasUsuario;
     private javax.swing.JLabel titulo;
     private javax.swing.JLabel titulo1;
     private javax.swing.JLabel usuario;
     private javax.swing.JButton usuarioCambiarAdmin;
+    private javax.swing.JButton usuarioCerrarSesion;
     private javax.swing.JScrollPane usuarioScrollPanel;
     // End of variables declaration//GEN-END:variables
 }
