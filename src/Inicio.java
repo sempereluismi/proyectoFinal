@@ -75,8 +75,9 @@ public class Inicio extends javax.swing.JFrame {
         panelUsuario = new javax.swing.JPanel();
         UsuarioNombre = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        usuarioTipoUsuario = new javax.swing.JLabel();
         usuarioCambiarAdmin = new javax.swing.JButton();
+        usuarioScrollPanel = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         panelAdmin = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -269,10 +270,6 @@ public class Inicio extends javax.swing.JFrame {
         jLabel4.setText("TAREAS DE");
         panelUsuario.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
-        usuarioTipoUsuario.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
-        usuarioTipoUsuario.setText("AAA");
-        panelUsuario.add(usuarioTipoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 280, 250, -1));
-
         usuarioCambiarAdmin.setText("Editar Usuarios");
         usuarioCambiarAdmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -280,6 +277,21 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         panelUsuario.add(usuarioCambiarAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 30, -1, -1));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        usuarioScrollPanel.setViewportView(jTable1);
+
+        panelUsuario.add(usuarioScrollPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 680, 270));
 
         panel.add(panelUsuario, "panelLista");
 
@@ -363,7 +375,7 @@ public class Inicio extends javax.swing.JFrame {
 
         if (resultado) {
             UsuarioNombre.setText(nombre.toUpperCase());
-            usuarioTipoUsuario.setText(getTipoUsuario(nombre));
+            usuarioCambiarAdmin.setVisible(getTipoUsuario(nombre).equals("administrador"));
             cambiarVista("panelLista");
         }
 
@@ -426,6 +438,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JTextField iniciarUsuario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel labelContra;
     private javax.swing.JLabel labelCorreo;
     private javax.swing.JLabel labelFecha;
@@ -439,6 +452,6 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel titulo1;
     private javax.swing.JLabel usuario;
     private javax.swing.JButton usuarioCambiarAdmin;
-    private javax.swing.JLabel usuarioTipoUsuario;
+    private javax.swing.JScrollPane usuarioScrollPanel;
     // End of variables declaration//GEN-END:variables
 }
