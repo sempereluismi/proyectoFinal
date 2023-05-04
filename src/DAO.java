@@ -1,5 +1,6 @@
 
 import java.sql.*;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,23 +16,29 @@ public class DAO {
         this.contraseña = contraseña;
     }
 
-    public ResultSet getTareasUsuario(String nombreUsuario) {
+    public ArrayList getTareasUsuario(String nombreUsuario) {
         String consulta
                 = "SELECT texto, estado, fechaInicio, fechaFin from tarea WHERE idUsuario IN "
                 + "(SELECT idUsuario FROM usuario WHERE nombre =  ?  );";
         ResultSet resultado = null;
+        ArrayList<Tarea> tareas = new ArrayList<>();
         try (Connection conexion = DriverManager.getConnection(
                 "jdbc:mysql://192.168.109.08:3306/proyectofinal", this.usuario, this.contraseña); PreparedStatement ps = conexion.prepareStatement(consulta)) {
 
             ps.setString(1, nombreUsuario);
             resultado = ps.executeQuery();
+            
+            while (resultado.next()) {                
+                tareas.add(new Tarea(resultado.getString(1), resultado.getString(2), 
+                    resultado.getString(3), resultado.getString(4)));
+            }
 
         } catch (SQLException e) {
             System.out.println("Código de Error: " + e.getErrorCode()
                     + "\nSLQState: " + e.getSQLState()
                     + "\nMensaje: " + e.getMessage());
         }
-        return resultado;
+        return tareas;
     }
 
     public boolean inicioSesión(String nombreUsuario, String contraseña) {
