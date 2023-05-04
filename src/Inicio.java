@@ -55,7 +55,7 @@ public class Inicio extends javax.swing.JFrame {
         Object datosTabla[][] = new Object[tareas.size()][4];
 
         for(int i = 0; i < datosTabla.length; i++ ) {
-            datosTabla[i][0] = tareas.get(i).getEstado();
+            datosTabla[i][0] = tareas.get(i).isEstadoBol();
             datosTabla[i][1] = tareas.get(i).getTexto();
             datosTabla[i][2] = tareas.get(i).getFechaInicio();
             datosTabla[i][3] = tareas.get(i).getFechaFin();
