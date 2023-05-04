@@ -2,6 +2,7 @@
 import java.awt.CardLayout;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -26,21 +27,6 @@ public class Inicio extends javax.swing.JFrame {
     DAO conexion = new DAO("LuisMiguel", "Palomitas02");
 
     /* CONTROLADOR */
-    private int filasResultSet(ResultSet result) {
-
-        int total = 0;
-
-        try {
-            while (result.next()) {
-                total++;
-            }
-
-            result.first();
-        } catch (SQLException e) {
-        }
-
-        return total;
-    }
 
     private void mostrarError(String text) {
         JOptionPane.showMessageDialog(this, text, "AVISO", JOptionPane.ERROR_MESSAGE);
@@ -65,29 +51,14 @@ public class Inicio extends javax.swing.JFrame {
 
     private void rellenarTablaTareas(String nombreUsuario) {
 
-        ResultSet tareas = conexion.getTareasUsuario(nombreUsuario);
-        Object datosTabla[][] = new Object[filasResultSet(tareas)][4];
+        ArrayList<Tarea> tareas = conexion.getTareasUsuario(nombreUsuario);
+        Object datosTabla[][] = new Object[tareas.size()][4];
 
-        try {
-            /*
-            for (int i = 0; i < datosTabla.length; i++) {
-                for (int j = 0; i < datosTabla[i].length; i++) {
-                    if (tareas.next()) {
-                        datosTabla[i][j] = tareas.getString(j + 1);
-                    }
-                }
-            }
-            */
-            while (tareas.next()) {
-                System.out.println("texto" + tareas.getString(1));
-                System.out.println("estado" + tareas.getString(2));
-                System.out.println("fechaInicio" + tareas.getString(3));
-                System.out.println("fechaFin" + tareas.getString(4));
-
-            }
-
-        } catch (SQLException e) {
-            System.out.println(e);
+        for(int i = 0; i < datosTabla.length; i++ ) {
+            datosTabla[i][0] = tareas.get(i).isEstadoBol();
+            datosTabla[i][1] = tareas.get(i).getTexto();
+            datosTabla[i][2] = tareas.get(i).getFechaInicio();
+            datosTabla[i][3] = tareas.get(i).getFechaFin();
         }
 
         tableTareas.setModel(new javax.swing.table.DefaultTableModel(
