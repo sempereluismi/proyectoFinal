@@ -1,10 +1,9 @@
 
 import java.awt.CardLayout;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 /**
  *
  * @author a22luismsg
@@ -27,6 +26,25 @@ public class Inicio extends javax.swing.JFrame {
     DAO conexion = new DAO("LuisMiguel", "Palomitas02");
 
     /* CONTROLADOR */
+    private int filasResultSet(ResultSet result) {
+
+        int total = 0;
+
+        try {
+            while (result.next()) {
+                total++;
+            }
+
+            result.first();
+        } catch (SQLException e) {
+        }
+
+        return total;
+    }
+
+    private void mostrarError(String text) {
+        JOptionPane.showMessageDialog(this, text, "AVISO", JOptionPane.ERROR_MESSAGE);
+    }
 
     private boolean insertarUsuario(String nombreUsuario, String contraseña, String correo, String fechaNacimiento) {
         return conexion.crearUsuario(nombreUsuario, contraseña, correo, fechaNacimiento);
@@ -43,6 +61,41 @@ public class Inicio extends javax.swing.JFrame {
     private void cambiarVista(String vista) {
         CardLayout card = (CardLayout) panel.getLayout();
         card.show(panel, vista);
+    }
+
+    private void rellenarTablaTareas(String nombreUsuario) {
+
+        ResultSet tareas = conexion.getTareasUsuario(nombreUsuario);
+        Object datosTabla[][] = new Object[filasResultSet(tareas)][4];
+
+        try {
+            /*
+            for (int i = 0; i < datosTabla.length; i++) {
+                for (int j = 0; i < datosTabla[i].length; i++) {
+                    if (tareas.next()) {
+                        datosTabla[i][j] = tareas.getString(j + 1);
+                    }
+                }
+            }
+            */
+            while (tareas.next()) {
+                System.out.println("texto" + tareas.getString(1));
+                System.out.println("estado" + tareas.getString(2));
+                System.out.println("fechaInicio" + tareas.getString(3));
+                System.out.println("fechaFin" + tareas.getString(4));
+
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        tableTareas.setModel(new javax.swing.table.DefaultTableModel(
+                datosTabla,
+                new String[]{
+                    "Estado", "texto", "fecha inicio", "fecha fin"
+                }
+        ));
     }
 
     /* VISTA */
@@ -70,14 +123,16 @@ public class Inicio extends javax.swing.JFrame {
         titulo1 = new javax.swing.JLabel();
         crearCuenta = new javax.swing.JButton();
         crearContraseña = new javax.swing.JPasswordField();
+        crearInicioSesión = new javax.swing.JButton();
         panelUsuario = new javax.swing.JPanel();
         UsuarioNombre = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         usuarioScrollPanel = new javax.swing.JScrollPane();
-        tareasUsuario = new javax.swing.JTable();
+        tableTareas = new javax.swing.JTable();
         usuarioCerrarSesion = new javax.swing.JButton();
         usuarioCambiarAdmin = new javax.swing.JButton();
         panelAdmin = new javax.swing.JPanel();
+        jToggleButton1 = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -207,6 +262,13 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
+        crearInicioSesión.setText("Iniciar Sesión");
+        crearInicioSesión.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                crearInicioSesiónActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelCuentaLayout = new javax.swing.GroupLayout(panelCuenta);
         panelCuenta.setLayout(panelCuentaLayout);
         panelCuentaLayout.setHorizontalGroup(
@@ -216,7 +278,10 @@ public class Inicio extends javax.swing.JFrame {
                 .addGroup(panelCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(titulo1)
                     .addGroup(panelCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(crearCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(panelCuentaLayout.createSequentialGroup()
+                            .addComponent(crearInicioSesión)
+                            .addGap(18, 18, 18)
+                            .addComponent(crearCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(panelCuentaLayout.createSequentialGroup()
                             .addGroup(panelCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(labelFecha)
@@ -236,15 +301,15 @@ public class Inicio extends javax.swing.JFrame {
             .addGroup(panelCuentaLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(titulo1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addGap(27, 27, 27)
                 .addGroup(panelCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(crearNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelUsuario))
-                .addGap(32, 32, 32)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addGroup(panelCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(crearContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelContra))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
+                .addGap(52, 52, 52)
                 .addGroup(panelCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(crearCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelCorreo))
@@ -252,161 +317,24 @@ public class Inicio extends javax.swing.JFrame {
                 .addGroup(panelCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(crearFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelFecha))
-                .addGap(34, 34, 34)
-                .addComponent(crearCuenta))
+                .addGap(28, 28, 28)
+                .addGroup(panelCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(crearCuenta)
+                    .addComponent(crearInicioSesión))
+                .addGap(24, 24, 24))
         );
 
         panel.add(panelCuenta, "panelCuenta");
 
-        panelUsuario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
         UsuarioNombre.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
         UsuarioNombre.setText("AAA");
-        panelUsuario.add(UsuarioNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 250, -1));
 
         jLabel4.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
         jLabel4.setText("TAREAS DE");
-        panelUsuario.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
-        tareasUsuario.setModel(new javax.swing.table.DefaultTableModel(
+        tableTareas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},        {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},        {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},        {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},        {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},        {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},        {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},        {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},        {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},        {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},        {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},        {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},        {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},        {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},        {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},        {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},        {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},        {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},        {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},        {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},        {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},        {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},        {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},        {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},        {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},        {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},        {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},        {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},        {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},        {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},        {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},        {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},        {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},        {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},        {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},        {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},        {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},        {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},        {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},        {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},        {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},        {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},        {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},        {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},        {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null}
@@ -415,9 +343,7 @@ public class Inicio extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        usuarioScrollPanel.setViewportView(tareasUsuario);
-
-        panelUsuario.add(usuarioScrollPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 680, 270));
+        usuarioScrollPanel.setViewportView(tableTareas);
 
         usuarioCerrarSesion.setText("Cerrar Sesión");
         usuarioCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
@@ -425,7 +351,6 @@ public class Inicio extends javax.swing.JFrame {
                 usuarioCerrarSesionActionPerformed(evt);
             }
         });
-        panelUsuario.add(usuarioCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 370, -1, -1));
 
         usuarioCambiarAdmin.setText("Panel Admin");
         usuarioCambiarAdmin.addActionListener(new java.awt.event.ActionListener() {
@@ -433,22 +358,66 @@ public class Inicio extends javax.swing.JFrame {
                 usuarioCambiarAdminActionPerformed(evt);
             }
         });
-        panelUsuario.add(usuarioCambiarAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 30, -1, -1));
+
+        javax.swing.GroupLayout panelUsuarioLayout = new javax.swing.GroupLayout(panelUsuario);
+        panelUsuario.setLayout(panelUsuarioLayout);
+        panelUsuarioLayout.setHorizontalGroup(
+            panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelUsuarioLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel4)
+                .addGap(7, 7, 7)
+                .addComponent(UsuarioNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(180, 180, 180)
+                .addComponent(usuarioCambiarAdmin))
+            .addGroup(panelUsuarioLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(usuarioScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(panelUsuarioLayout.createSequentialGroup()
+                .addGap(580, 580, 580)
+                .addComponent(usuarioCerrarSesion))
+        );
+        panelUsuarioLayout.setVerticalGroup(
+            panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelUsuarioLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(UsuarioNombre)
+                    .addComponent(usuarioCambiarAdmin))
+                .addGap(22, 22, 22)
+                .addComponent(usuarioScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(usuarioCerrarSesion))
+        );
 
         panel.add(panelUsuario, "panelLista");
+
+        jToggleButton1.setText("jToggleButton1");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelAdminLayout = new javax.swing.GroupLayout(panelAdmin);
         panelAdmin.setLayout(panelAdminLayout);
         panelAdminLayout.setHorizontalGroup(
             panelAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 732, Short.MAX_VALUE)
+            .addGroup(panelAdminLayout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addComponent(jToggleButton1)
+                .addContainerGap(562, Short.MAX_VALUE))
         );
         panelAdminLayout.setVerticalGroup(
             panelAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 409, Short.MAX_VALUE)
+            .addGroup(panelAdminLayout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(jToggleButton1)
+                .addContainerGap(354, Short.MAX_VALUE))
         );
 
-        panel.add(panelAdmin, "card5");
+        panel.add(panelAdmin, "panelAdmin");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -480,6 +449,8 @@ public class Inicio extends javax.swing.JFrame {
 
         if (crearUsuarioCorrecto) {
             cambiarVista("panelInicio");
+        } else {
+            mostrarError("El usuario no se ha creado con exito");
         }
 
     }//GEN-LAST:event_crearCuentaActionPerformed
@@ -507,11 +478,14 @@ public class Inicio extends javax.swing.JFrame {
         boolean resultado = iniciarSesion(nombre, contraseña);
 
         if (resultado) {
+            rellenarTablaTareas(nombre);
             UsuarioNombre.setText(nombre.toUpperCase());
             usuarioCambiarAdmin.setVisible(getTipoUsuario(nombre).equals("administrador"));
             cambiarVista("panelLista");
             iniciarUsuario.setText("");
             iniciarPassword.setText("");
+        } else {
+            mostrarError("El Usuario o la Contraseña son incorrectas");
         }
 
     }//GEN-LAST:event_iniciarSesionActionPerformed
@@ -525,8 +499,16 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_usuarioCerrarSesionActionPerformed
 
     private void usuarioCambiarAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarioCambiarAdminActionPerformed
-        cambiarVista("panelInicio");
+        cambiarVista("panelAdmin");
     }//GEN-LAST:event_usuarioCambiarAdminActionPerformed
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
+
+    private void crearInicioSesiónActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearInicioSesiónActionPerformed
+        cambiarVista("panelInicio");
+    }//GEN-LAST:event_crearInicioSesiónActionPerformed
 
     /**
      * @param args the command line arguments
@@ -571,11 +553,13 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JTextField crearCorreo;
     private javax.swing.JButton crearCuenta;
     private javax.swing.JTextField crearFechaNacimiento;
+    private javax.swing.JButton crearInicioSesión;
     private javax.swing.JTextField crearNombreUsuario;
     private javax.swing.JPasswordField iniciarPassword;
     private javax.swing.JButton iniciarSesion;
     private javax.swing.JTextField iniciarUsuario;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JLabel labelContra;
     private javax.swing.JLabel labelCorreo;
     private javax.swing.JLabel labelFecha;
@@ -585,7 +569,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JPanel panelCuenta;
     private javax.swing.JPanel panelInicio;
     private javax.swing.JPanel panelUsuario;
-    private javax.swing.JTable tareasUsuario;
+    private javax.swing.JTable tableTareas;
     private javax.swing.JLabel titulo;
     private javax.swing.JLabel titulo1;
     private javax.swing.JLabel usuario;

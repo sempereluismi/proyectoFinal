@@ -31,7 +31,6 @@ public class DAO {
                     + "\nSLQState: " + e.getSQLState()
                     + "\nMensaje: " + e.getMessage());
         }
-
         return resultado;
     }
 
@@ -53,9 +52,7 @@ public class DAO {
                 return false;
             }
 
-            if (Hash.calcularHash(contraseña).equals(contraseñaBD)) {
-                return true;
-            }
+            return (Hash.calcularHash(contraseña).equals(contraseñaBD));
 
         } catch (SQLException e) {
             System.out.println("Código de Error: " + e.getErrorCode()
@@ -69,7 +66,7 @@ public class DAO {
     public boolean crearUsuario(String nombreUsuario, String contraseña, String correo, String fechaNacimiento) {
         String consulta = "INSERT INTO usuario ( nombre, contrasena, correo, fechaNacimiento ) values (?, ?, ?, ?);";
         int resultado = 0;
-        String newContraseña = Hash.calcularHash(this.contraseña);
+        String newContraseña = Hash.calcularHash(contraseña);
 
         try (Connection conexion = DriverManager.getConnection(
                 "jdbc:mysql://192.168.109.08:3306/proyectofinal", this.usuario, this.contraseña); PreparedStatement ps = conexion.prepareStatement(consulta)) {
@@ -99,8 +96,8 @@ public class DAO {
 
             ps.setString(1, nombreUsuario);
             resultado = ps.executeQuery();
-            
-            if ( resultado.next() ) {
+
+            if (resultado.next()) {
                 tipoUsuario = resultado.getString(1);
             }
 
@@ -109,7 +106,7 @@ public class DAO {
                     + "\nSLQState: " + e.getSQLState()
                     + "\nMensaje: " + e.getMessage());
         }
-        
+
         return tipoUsuario;
     }
 }
