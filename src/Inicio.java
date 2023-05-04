@@ -97,6 +97,38 @@ public class Inicio extends javax.swing.JFrame {
                 }
         ));
     }
+    
+    private void rellenarTablaAdmin(String nombreUsuario) {
+
+        ResultSet tareas = conexion.getTareasUsuario(nombreUsuario);
+        Object datosTabla[][] = new Object[filasResultSet(tareas)][5];
+
+        try {
+            /*
+            for (int i = 0; i < datosTabla.length; i++) {
+                for (int j = 0; i < datosTabla[i].length; i++) {
+                    if (tareas.next()) {
+                        datosTabla[i][j] = tareas.getString(j + 1);
+                    }
+                }
+            }
+            */
+            while (tareas.next()) {
+                System.out.println("usuario" + tareas.getString(1));
+
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        tableTareas.setModel(new javax.swing.table.DefaultTableModel(
+                datosTabla,
+                new String[]{
+                    "usuario", "tipo Usuario"
+                }
+        ));
+    }
 
     /* VISTA */
     @SuppressWarnings("unchecked")
@@ -131,8 +163,19 @@ public class Inicio extends javax.swing.JFrame {
         tableTareas = new javax.swing.JTable();
         usuarioCerrarSesion = new javax.swing.JButton();
         usuarioCambiarAdmin = new javax.swing.JButton();
+        botonTarea = new javax.swing.JButton();
         panelAdmin = new javax.swing.JPanel();
         jToggleButton1 = new javax.swing.JToggleButton();
+        adminTitulo = new javax.swing.JLabel();
+        adminScrollPanel = new javax.swing.JScrollPane();
+        adminTabla = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        panelTareas = new javax.swing.JPanel();
+        tareaTitulo = new javax.swing.JLabel();
+        tareaTarea = new javax.swing.JLabel();
+        tareaTexto = new javax.swing.JTextField();
+        botonSalirTarea = new javax.swing.JButton();
+        botonAñadirTareas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -187,15 +230,16 @@ public class Inicio extends javax.swing.JFrame {
                         .addGroup(panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(panelInicioLayout.createSequentialGroup()
                                 .addGroup(panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(usuario)
-                                    .addComponent(contra))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(iniciarUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE)
-                                    .addComponent(iniciarPassword)))
+                                    .addComponent(contra)
+                                    .addComponent(usuario))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                                .addGroup(panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(iniciarPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(iniciarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(8, 8, 8))
                             .addGroup(panelInicioLayout.createSequentialGroup()
                                 .addComponent(botonCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 289, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(iniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(31, 31, 31))))
         );
@@ -204,19 +248,19 @@ public class Inicio extends javax.swing.JFrame {
             .addGroup(panelInicioLayout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addComponent(titulo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+                .addGap(37, 37, 37)
                 .addGroup(panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(usuario)
                     .addComponent(iniciarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(47, 47, 47)
+                .addGap(33, 33, 33)
                 .addGroup(panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(contra)
                     .addComponent(iniciarPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(60, 60, 60)
+                .addGap(61, 61, 61)
                 .addGroup(panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonCrear)
                     .addComponent(iniciarSesion))
-                .addGap(66, 66, 66))
+                .addContainerGap(150, Short.MAX_VALUE))
         );
 
         panel.add(panelInicio, "panelInicio");
@@ -277,24 +321,25 @@ public class Inicio extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addGroup(panelCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(titulo1)
-                    .addGroup(panelCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(panelCuentaLayout.createSequentialGroup()
-                            .addComponent(crearInicioSesión)
-                            .addGap(18, 18, 18)
-                            .addComponent(crearCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(panelCuentaLayout.createSequentialGroup()
-                            .addGroup(panelCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(labelFecha)
-                                .addComponent(labelUsuario)
-                                .addComponent(labelCorreo)
-                                .addComponent(labelContra))
-                            .addGap(18, 18, 18)
-                            .addGroup(panelCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(crearContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(crearCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(crearNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(crearFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(panelCuentaLayout.createSequentialGroup()
+                        .addGroup(panelCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelFecha)
+                            .addComponent(labelUsuario)
+                            .addComponent(labelCorreo)
+                            .addComponent(labelContra))
+                        .addGap(18, 18, 18)
+                        .addGroup(panelCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(crearContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(crearCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(crearNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(crearFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(25, 25, 25))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCuentaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(crearInicioSesión)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(crearCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35))
         );
         panelCuentaLayout.setVerticalGroup(
             panelCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -305,23 +350,23 @@ public class Inicio extends javax.swing.JFrame {
                 .addGroup(panelCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(crearNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelUsuario))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addGap(27, 27, 27)
                 .addGroup(panelCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(crearContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelContra))
-                .addGap(52, 52, 52)
+                    .addComponent(labelContra)
+                    .addComponent(crearContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(panelCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(crearCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelCorreo))
-                .addGap(43, 43, 43)
+                    .addComponent(labelCorreo)
+                    .addComponent(crearCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
                 .addGroup(panelCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(crearFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelFecha))
-                .addGap(28, 28, 28)
+                    .addComponent(labelFecha)
+                    .addComponent(crearFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(42, 42, 42)
                 .addGroup(panelCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(crearCuenta)
-                    .addComponent(crearInicioSesión))
-                .addGap(24, 24, 24))
+                    .addComponent(crearInicioSesión)
+                    .addComponent(crearCuenta))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
 
         panel.add(panelCuenta, "panelCuenta");
@@ -359,6 +404,13 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
+        botonTarea.setText("Añadir Tarea");
+        botonTarea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonTareaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelUsuarioLayout = new javax.swing.GroupLayout(panelUsuario);
         panelUsuario.setLayout(panelUsuarioLayout);
         panelUsuarioLayout.setHorizontalGroup(
@@ -374,7 +426,9 @@ public class Inicio extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addComponent(usuarioScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(panelUsuarioLayout.createSequentialGroup()
-                .addGap(580, 580, 580)
+                .addGap(80, 80, 80)
+                .addComponent(botonTarea)
+                .addGap(425, 425, 425)
                 .addComponent(usuarioCerrarSesion))
         );
         panelUsuarioLayout.setVerticalGroup(
@@ -388,7 +442,9 @@ public class Inicio extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addComponent(usuarioScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
-                .addComponent(usuarioCerrarSesion))
+                .addGroup(panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(usuarioCerrarSesion)
+                    .addComponent(botonTarea)))
         );
 
         panel.add(panelUsuario, "panelLista");
@@ -400,24 +456,113 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
+        adminTitulo.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
+        adminTitulo.setText("PANEL DE ADMINISTRADOR");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        adminTabla.setViewportView(jTable1);
+
+        adminScrollPanel.setViewportView(adminTabla);
+
         javax.swing.GroupLayout panelAdminLayout = new javax.swing.GroupLayout(panelAdmin);
         panelAdmin.setLayout(panelAdminLayout);
         panelAdminLayout.setHorizontalGroup(
             panelAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelAdminLayout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addComponent(jToggleButton1)
-                .addContainerGap(562, Short.MAX_VALUE))
+                .addGap(25, 25, 25)
+                .addGroup(panelAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(adminScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelAdminLayout.createSequentialGroup()
+                        .addComponent(adminTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(127, 127, 127)
+                        .addComponent(jToggleButton1)))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
         panelAdminLayout.setVerticalGroup(
             panelAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelAdminLayout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jToggleButton1)
-                .addContainerGap(354, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addGroup(panelAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jToggleButton1)
+                    .addComponent(adminTitulo))
+                .addGap(18, 18, 18)
+                .addComponent(adminScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         panel.add(panelAdmin, "panelAdmin");
+
+        tareaTitulo.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
+        tareaTitulo.setText("CREACIÓN DE TAREAS");
+
+        tareaTarea.setText("Texto de tarea");
+
+        tareaTexto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tareaTextoActionPerformed(evt);
+            }
+        });
+
+        botonSalirTarea.setText("Salir");
+        botonSalirTarea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonSalirTareaActionPerformed(evt);
+            }
+        });
+
+        botonAñadirTareas.setText("Añadir Tarea");
+        botonAñadirTareas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAñadirTareasActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelTareasLayout = new javax.swing.GroupLayout(panelTareas);
+        panelTareas.setLayout(panelTareasLayout);
+        panelTareasLayout.setHorizontalGroup(
+            panelTareasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTareasLayout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addGroup(panelTareasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tareaTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelTareasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(panelTareasLayout.createSequentialGroup()
+                            .addComponent(botonSalirTarea)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(botonAñadirTareas))
+                        .addGroup(panelTareasLayout.createSequentialGroup()
+                            .addComponent(tareaTarea)
+                            .addGap(18, 18, 18)
+                            .addComponent(tareaTexto, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(93, Short.MAX_VALUE))
+        );
+        panelTareasLayout.setVerticalGroup(
+            panelTareasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTareasLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(tareaTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(49, 49, 49)
+                .addGroup(panelTareasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tareaTarea)
+                    .addComponent(tareaTexto, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 163, Short.MAX_VALUE)
+                .addGroup(panelTareasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botonSalirTarea)
+                    .addComponent(botonAñadirTareas))
+                .addGap(31, 31, 31))
+        );
+
+        panel.add(panelTareas, "panelTareas");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -429,7 +574,7 @@ public class Inicio extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, 411, Short.MAX_VALUE))
         );
 
         pack();
@@ -510,6 +655,22 @@ public class Inicio extends javax.swing.JFrame {
         cambiarVista("panelInicio");
     }//GEN-LAST:event_crearInicioSesiónActionPerformed
 
+    private void botonTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonTareaActionPerformed
+        cambiarVista("panelTareas");
+    }//GEN-LAST:event_botonTareaActionPerformed
+
+    private void tareaTextoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tareaTextoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tareaTextoActionPerformed
+
+    private void botonSalirTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirTareaActionPerformed
+        cambiarVista("panelLista");
+    }//GEN-LAST:event_botonSalirTareaActionPerformed
+
+    private void botonAñadirTareasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAñadirTareasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonAñadirTareasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -547,7 +708,13 @@ public class Inicio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel UsuarioNombre;
+    private javax.swing.JScrollPane adminScrollPanel;
+    private javax.swing.JScrollPane adminTabla;
+    private javax.swing.JLabel adminTitulo;
+    private javax.swing.JButton botonAñadirTareas;
     private javax.swing.JButton botonCrear;
+    private javax.swing.JButton botonSalirTarea;
+    private javax.swing.JButton botonTarea;
     private javax.swing.JLabel contra;
     private javax.swing.JPasswordField crearContraseña;
     private javax.swing.JTextField crearCorreo;
@@ -559,6 +726,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JButton iniciarSesion;
     private javax.swing.JTextField iniciarUsuario;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JTable jTable1;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JLabel labelContra;
     private javax.swing.JLabel labelCorreo;
@@ -568,8 +736,12 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JPanel panelAdmin;
     private javax.swing.JPanel panelCuenta;
     private javax.swing.JPanel panelInicio;
+    private javax.swing.JPanel panelTareas;
     private javax.swing.JPanel panelUsuario;
     private javax.swing.JTable tableTareas;
+    private javax.swing.JLabel tareaTarea;
+    private javax.swing.JTextField tareaTexto;
+    private javax.swing.JLabel tareaTitulo;
     private javax.swing.JLabel titulo;
     private javax.swing.JLabel titulo1;
     private javax.swing.JLabel usuario;

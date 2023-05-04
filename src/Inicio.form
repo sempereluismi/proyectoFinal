@@ -30,7 +30,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="panel" max="32767" attributes="0"/>
+              <Component id="panel" pref="411" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -61,18 +61,19 @@
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="usuario" min="-2" max="-2" attributes="0"/>
-                                          <Component id="contra" min="-2" max="-2" attributes="0"/>
+                                          <Component id="contra" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="usuario" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="iniciarUsuario" pref="506" max="32767" attributes="0"/>
-                                          <Component id="iniciarPassword" max="32767" attributes="0"/>
+                                      <EmptySpace pref="45" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="iniciarPassword" min="-2" pref="506" max="-2" attributes="0"/>
+                                          <Component id="iniciarUsuario" min="-2" pref="506" max="-2" attributes="0"/>
                                       </Group>
+                                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
                                       <Component id="botonCrear" min="-2" pref="167" max="-2" attributes="0"/>
-                                      <EmptySpace pref="289" max="32767" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
                                       <Component id="iniciarSesion" min="-2" pref="198" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -87,22 +88,22 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                       <Component id="titulo" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="103" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="usuario" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="iniciarUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="contra" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="iniciarPassword" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="botonCrear" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="iniciarSesion" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
+                      <EmptySpace pref="150" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -174,30 +175,30 @@
                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="titulo1" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="crearInicioSesión" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="crearCuenta" min="-2" pref="195" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="labelFecha" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelUsuario" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelCorreo" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelContra" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="labelFecha" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="labelUsuario" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="labelCorreo" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="labelContra" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="crearContraseña" min="-2" pref="523" max="-2" attributes="0"/>
-                                      <Component id="crearCorreo" min="-2" pref="523" max="-2" attributes="0"/>
-                                      <Component id="crearNombreUsuario" min="-2" pref="523" max="-2" attributes="0"/>
-                                      <Component id="crearFechaNacimiento" min="-2" pref="523" max="-2" attributes="0"/>
-                                  </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="crearContraseña" min="-2" pref="523" max="-2" attributes="0"/>
+                                  <Component id="crearCorreo" min="-2" pref="523" max="-2" attributes="0"/>
+                                  <Component id="crearNombreUsuario" min="-2" pref="523" max="-2" attributes="0"/>
+                                  <Component id="crearFechaNacimiento" min="-2" pref="523" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="crearInicioSesión" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="crearCuenta" min="-2" pref="195" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -211,27 +212,27 @@
                           <Component id="crearNombreUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="labelUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="54" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="crearContraseña" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="labelContra" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="crearContraseña" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="crearCorreo" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="labelCorreo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="crearCorreo" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="crearFechaNacimiento" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="labelFecha" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="crearFechaNacimiento" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="crearCuenta" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="crearInicioSesión" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="crearCuenta" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                      <EmptySpace pref="92" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -338,7 +339,9 @@
                       <Component id="usuarioScrollPanel" min="-2" pref="680" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
-                      <EmptySpace min="580" pref="580" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
+                      <Component id="botonTarea" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="425" max="-2" attributes="0"/>
                       <Component id="usuarioCerrarSesion" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -355,7 +358,10 @@
                       <EmptySpace min="22" pref="22" max="-2" attributes="0"/>
                       <Component id="usuarioScrollPanel" min="-2" pref="270" max="-2" attributes="0"/>
                       <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
-                      <Component id="usuarioCerrarSesion" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="usuarioCerrarSesion" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="botonTarea" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -411,6 +417,14 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="usuarioCambiarAdminActionPerformed"/>
               </Events>
             </Component>
+            <Component class="javax.swing.JButton" name="botonTarea">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="A&#xf1;adir Tarea"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonTareaActionPerformed"/>
+              </Events>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="panelAdmin">
@@ -424,18 +438,30 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-                      <Component id="jToggleButton1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="562" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="adminScrollPanel" min="-2" pref="630" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="adminTitulo" min="-2" pref="323" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="127" max="-2" attributes="0"/>
+                              <Component id="jToggleButton1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace pref="75" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                      <Component id="jToggleButton1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="354" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jToggleButton1" min="-2" max="-2" attributes="0"/>
+                          <Component id="adminTitulo" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="adminScrollPanel" min="-2" pref="310" max="-2" attributes="0"/>
+                      <EmptySpace pref="35" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -447,6 +473,129 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jToggleButton1ActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="adminTitulo">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Liberation Sans" size="24" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="PANEL DE ADMINISTRADOR"/>
+              </Properties>
+            </Component>
+            <Container class="javax.swing.JScrollPane" name="adminScrollPanel">
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Container class="javax.swing.JScrollPane" name="adminTabla">
+                  <AuxValues>
+                    <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                  </AuxValues>
+
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                  <SubComponents>
+                    <Component class="javax.swing.JTable" name="jTable1">
+                      <Properties>
+                        <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                          <Table columnCount="4" rowCount="4">
+                            <Column editable="true" title="Title 1" type="java.lang.Object"/>
+                            <Column editable="true" title="Title 2" type="java.lang.Object"/>
+                            <Column editable="true" title="Title 3" type="java.lang.Object"/>
+                            <Column editable="true" title="Title 4" type="java.lang.Object"/>
+                          </Table>
+                        </Property>
+                      </Properties>
+                    </Component>
+                  </SubComponents>
+                </Container>
+              </SubComponents>
+            </Container>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="panelTareas">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+              <CardConstraints cardName="panelTareas"/>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="tareaTitulo" min="-2" pref="273" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="botonSalirTarea" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="botonAñadirTareas" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="tareaTarea" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="tareaTexto" min="-2" pref="501" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace pref="93" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                      <Component id="tareaTitulo" min="-2" pref="28" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="tareaTarea" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tareaTexto" alignment="3" min="-2" pref="96" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="163" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="botonSalirTarea" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="botonAñadirTareas" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="tareaTitulo">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Liberation Sans" size="24" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="CREACI&#xd3;N DE TAREAS"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="tareaTarea">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Texto de tarea"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tareaTexto">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tareaTextoActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="botonSalirTarea">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Salir"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonSalirTareaActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="botonA&#xf1;adirTareas">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="A&#xf1;adir Tarea"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonA&#xf1;adirTareasActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
