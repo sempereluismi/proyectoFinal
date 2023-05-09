@@ -27,9 +27,22 @@ public class Inicio extends javax.swing.JFrame {
     DAO conexion = new DAO("LuisMiguel", "Palomitas02");
 
     /* CONTROLADOR */
+    private int insertarTarea(String nombreUsuario, String texto) {
+        if (!texto.equals("")) {
+            boolean correcto = conexion.insertTarea(nombreUsuario, texto);
+            return correcto ? 1 : 0;
+        } else {
+            return 2;
+        }
+  
+    }
 
     private void mostrarError(String text) {
         JOptionPane.showMessageDialog(this, text, "AVISO", JOptionPane.ERROR_MESSAGE);
+    }
+
+    private void mostrarInfo(String text) {
+        JOptionPane.showMessageDialog(this, text, "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
     }
 
     private boolean insertarUsuario(String nombreUsuario, String contraseña, String correo, String fechaNacimiento) {
@@ -54,7 +67,7 @@ public class Inicio extends javax.swing.JFrame {
         ArrayList<Tarea> tareas = conexion.getTareasUsuario(nombreUsuario);
         Object datosTabla[][] = new Object[tareas.size()][4];
 
-        for(int i = 0; i < datosTabla.length; i++ ) {
+        for (int i = 0; i < datosTabla.length; i++) {
             datosTabla[i][0] = tareas.get(i).isEstadoBol();
             datosTabla[i][1] = tareas.get(i).getTexto();
             datosTabla[i][2] = tareas.get(i).getFechaInicio();
@@ -68,29 +81,19 @@ public class Inicio extends javax.swing.JFrame {
                 }
         ));
     }
-    
+
     private void rellenarTablaAdmin(String nombreUsuario) {
 
-        ResultSet tareas = conexion.getTareasUsuario(nombreUsuario);
-        Object datosTabla[][] = new Object[filasResultSet(tareas)][5];
+        ArrayList<Tarea> tareas = conexion.getTareasUsuario(nombreUsuario);
+        Object datosTabla[][] = new Object[tareas.size()][5];
 
-        try {
-            /*
-            for (int i = 0; i < datosTabla.length; i++) {
-                for (int j = 0; i < datosTabla[i].length; i++) {
-                    if (tareas.next()) {
-                        datosTabla[i][j] = tareas.getString(j + 1);
-                    }
-                }
-            }
-            */
-            while (tareas.next()) {
-                System.out.println("usuario" + tareas.getString(1));
+        for (int i = 0; i < datosTabla.length; i++) {
 
-            }
+            datosTabla[i][0] = tareas.get(i).isEstadoBol();
+            datosTabla[i][1] = tareas.get(i).getTexto();
+            datosTabla[i][2] = tareas.get(i).getFechaInicio();
+            datosTabla[i][3] = tareas.get(i).getFechaFin();
 
-        } catch (SQLException e) {
-            System.out.println(e);
         }
 
         tableTareas.setModel(new javax.swing.table.DefaultTableModel(
@@ -136,7 +139,7 @@ public class Inicio extends javax.swing.JFrame {
         usuarioCambiarAdmin = new javax.swing.JButton();
         botonTarea = new javax.swing.JButton();
         panelAdmin = new javax.swing.JPanel();
-        jToggleButton1 = new javax.swing.JToggleButton();
+        adminPanelUsuario = new javax.swing.JToggleButton();
         adminTitulo = new javax.swing.JLabel();
         adminScrollPanel = new javax.swing.JScrollPane();
         adminTabla = new javax.swing.JScrollPane();
@@ -337,7 +340,7 @@ public class Inicio extends javax.swing.JFrame {
                 .addGroup(panelCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(crearInicioSesión)
                     .addComponent(crearCuenta))
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
 
         panel.add(panelCuenta, "panelCuenta");
@@ -388,19 +391,20 @@ public class Inicio extends javax.swing.JFrame {
             panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelUsuarioLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jLabel4)
-                .addGap(7, 7, 7)
-                .addComponent(UsuarioNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(180, 180, 180)
-                .addComponent(usuarioCambiarAdmin))
-            .addGroup(panelUsuarioLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(usuarioScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(panelUsuarioLayout.createSequentialGroup()
-                .addGap(80, 80, 80)
-                .addComponent(botonTarea)
-                .addGap(425, 425, 425)
-                .addComponent(usuarioCerrarSesion))
+                .addGroup(panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelUsuarioLayout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(7, 7, 7)
+                        .addComponent(UsuarioNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(180, 180, 180)
+                        .addComponent(usuarioCambiarAdmin))
+                    .addGroup(panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(usuarioScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(panelUsuarioLayout.createSequentialGroup()
+                            .addComponent(usuarioCerrarSesion)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(botonTarea))))
+                .addGap(37, 37, 37))
         );
         panelUsuarioLayout.setVerticalGroup(
             panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -412,18 +416,19 @@ public class Inicio extends javax.swing.JFrame {
                     .addComponent(usuarioCambiarAdmin))
                 .addGap(22, 22, 22)
                 .addComponent(usuarioScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addGroup(panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(18, 18, 18)
+                .addGroup(panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(usuarioCerrarSesion)
-                    .addComponent(botonTarea)))
+                    .addComponent(botonTarea))
+                .addContainerGap())
         );
 
         panel.add(panelUsuario, "panelLista");
 
-        jToggleButton1.setText("jToggleButton1");
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+        adminPanelUsuario.setText("volver");
+        adminPanelUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
+                adminPanelUsuarioActionPerformed(evt);
             }
         });
 
@@ -451,20 +456,20 @@ public class Inicio extends javax.swing.JFrame {
             panelAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelAdminLayout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addGroup(panelAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(adminScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelAdminLayout.createSequentialGroup()
                         .addComponent(adminTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(127, 127, 127)
-                        .addComponent(jToggleButton1)))
-                .addContainerGap(75, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(adminPanelUsuario)))
+                .addContainerGap(94, Short.MAX_VALUE))
         );
         panelAdminLayout.setVerticalGroup(
             panelAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelAdminLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(panelAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jToggleButton1)
+                    .addComponent(adminPanelUsuario)
                     .addComponent(adminTitulo))
                 .addGap(18, 18, 18)
                 .addComponent(adminScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -511,7 +516,7 @@ public class Inicio extends javax.swing.JFrame {
                             .addComponent(botonSalirTarea)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(botonAñadirTareas))
-                        .addGroup(panelTareasLayout.createSequentialGroup()
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelTareasLayout.createSequentialGroup()
                             .addComponent(tareaTarea)
                             .addGap(18, 18, 18)
                             .addComponent(tareaTexto, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -522,11 +527,11 @@ public class Inicio extends javax.swing.JFrame {
             .addGroup(panelTareasLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(tareaTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
+                .addGap(122, 122, 122)
                 .addGroup(panelTareasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tareaTarea)
-                    .addComponent(tareaTexto, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 163, Short.MAX_VALUE)
+                    .addComponent(tareaTexto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)
                 .addGroup(panelTareasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonSalirTarea)
                     .addComponent(botonAñadirTareas))
@@ -618,9 +623,9 @@ public class Inicio extends javax.swing.JFrame {
         cambiarVista("panelAdmin");
     }//GEN-LAST:event_usuarioCambiarAdminActionPerformed
 
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
+    private void adminPanelUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminPanelUsuarioActionPerformed
+        cambiarVista("panelLista");
+    }//GEN-LAST:event_adminPanelUsuarioActionPerformed
 
     private void crearInicioSesiónActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearInicioSesiónActionPerformed
         cambiarVista("panelInicio");
@@ -639,7 +644,21 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_botonSalirTareaActionPerformed
 
     private void botonAñadirTareasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAñadirTareasActionPerformed
-        // TODO add your handling code here:
+        String nombre = UsuarioNombre.getText();
+        String text = tareaTexto.getText();
+        int returnTarea = insertarTarea(nombre, text);
+
+        if (returnTarea == 1) {
+            mostrarInfo("La tarea se añadio exitosamente");
+            tareaTexto.setText("");
+            rellenarTablaTareas(nombre);
+            cambiarVista("panelLista");
+        } else if (returnTarea == 0) {
+            mostrarError("Hubo un error al crear la tarea");
+            tareaTexto.setText("");
+        } else {
+            mostrarError("La tarea no debe estar vacía");
+        }
     }//GEN-LAST:event_botonAñadirTareasActionPerformed
 
     /**
@@ -679,6 +698,7 @@ public class Inicio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel UsuarioNombre;
+    private javax.swing.JToggleButton adminPanelUsuario;
     private javax.swing.JScrollPane adminScrollPanel;
     private javax.swing.JScrollPane adminTabla;
     private javax.swing.JLabel adminTitulo;
@@ -698,7 +718,6 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JTextField iniciarUsuario;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JTable jTable1;
-    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JLabel labelContra;
     private javax.swing.JLabel labelCorreo;
     private javax.swing.JLabel labelFecha;

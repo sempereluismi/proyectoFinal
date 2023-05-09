@@ -142,7 +142,7 @@ public class DAO {
 
     public boolean insertTarea(String nombreUsuario, String texto) {
         String idUsuario = Integer.toString(getIdUsuario(nombreUsuario));
-        String consulta = "INSERT INTO tarea ( idUsuario, texto ) values (?, ?);";
+        String consulta = "INSERT INTO tarea ( idUsuario, texto, fechaInicio ) values (?, ?, now());";
         int resultado = 0;
         String newContraseña = Hash.calcularHash(contraseña);
 
