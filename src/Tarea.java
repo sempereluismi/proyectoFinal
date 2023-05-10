@@ -13,15 +13,15 @@ public class Tarea {
     private String estado;
     private boolean estadoBol;
     private String fechaInicio;
-    private String fechaFin;
+    private int idTarea;
 
-    public Tarea(String texto, String estado, String fechaInicio, String fechaFin) {
+    public Tarea(String texto, String estado, String fechaInicio, int idTarea) {
         this.texto = texto;
         this.estado = estado;
         this.fechaInicio = fechaInicio;
-        this.fechaFin = fechaFin;
+        this.idTarea = idTarea;
         
-        this.estadoBol = (estado.equals("activa")) ? true : false;
+        this.estadoBol = (estado.equals("activa")) ? false : true;
     }
 
     public String getTexto() {
@@ -44,21 +44,24 @@ public class Tarea {
         this.estadoBol = estadoBol;
     }
 
-    public String getFechaFin() {
-        return fechaFin;
-    }
-
-    public void setFechaFin(String fechaFin) {
-        this.fechaFin = fechaFin;
-    }
     
     public String getFechaInicio() {
         return fechaInicio;
     }
 
+    public int getIdTarea() {
+        return idTarea;
+    }
+
+    public void setIdTarea(int idTarea) {
+        this.idTarea = idTarea;
+    }
+    
+    
+
     @Override
     public String toString() {
-        return "Tarea{" + "texto=" + texto + ", estado=" + estado + ", estadoBol=" + estadoBol + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + '}';
+        return "Tarea{" + "texto=" + texto + ", estado=" + estado + ", estadoBol=" + estadoBol + ", fechaInicio=" + fechaInicio + '}';
     }
     
     

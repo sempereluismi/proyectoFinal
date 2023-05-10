@@ -18,7 +18,7 @@ public class DAO {
 
     public ArrayList getTareasUsuario(String nombreUsuario) {
         String consulta
-                = "SELECT texto, estado, fechaInicio, fechaFin from tarea WHERE idUsuario IN "
+                = "SELECT texto, estado, fechaInicio, idTarea from tarea WHERE idUsuario IN "
                 + "(SELECT idUsuario FROM usuario WHERE nombre =  ?  );";
         ResultSet resultado = null;
         ArrayList<Tarea> tareas = new ArrayList<>();
@@ -30,7 +30,7 @@ public class DAO {
 
             while (resultado.next()) {
                 tareas.add(new Tarea(resultado.getString(1), resultado.getString(2),
-                        resultado.getString(3), resultado.getString(4)));
+                        resultado.getString(3), resultado.getInt(4)));
             }
 
         } catch (SQLException e) {
@@ -140,6 +140,31 @@ public class DAO {
         return idUsuario;
     }
 
+    private boolean comprobarTextoRepetido(String nombreUsuario, String texto) {
+        String idUsuario = Integer.toString(getIdUsuario(nombreUsuario));
+        String consulta = "SELECT texto FROM tarea WHERE idUsuario = ?;";
+        ResultSet resultado = null;
+        try (Connection conexion = DriverManager.getConnection(
+                "jdbc:mysql://192.168.109.08:3306/proyectofinal", this.usuario, this.contraseña); PreparedStatement ps = conexion.prepareStatement(consulta)) {
+
+            ps.setString(1, idUsuario);
+            resultado = ps.executeQuery();
+
+            while (resultado.next()) {
+                if (resultado.getString(1).equals(texto)) {
+                    return false;
+                }
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Código de Error: " + e.getErrorCode()
+                    + "\nSLQState: " + e.getSQLState()
+                    + "\nMensaje: " + e.getMessage());
+        }
+
+        return true;
+    }
+
     public boolean insertTarea(String nombreUsuario, String texto) {
         String idUsuario = Integer.toString(getIdUsuario(nombreUsuario));
         String consulta = "INSERT INTO tarea ( idUsuario, texto, fechaInicio ) values (?, ?, now());";
@@ -151,8 +176,11 @@ public class DAO {
 
             ps.setString(1, idUsuario);
             ps.setString(2, texto);
-            resultado = ps.executeUpdate();
-
+            if (comprobarTextoRepetido(nombreUsuario, texto)) {
+                resultado = ps.executeUpdate();
+            } else {
+                resultado = 0;
+            }
         } catch (SQLException e) {
             System.out.println("Código de Error: " + e.getErrorCode()
                     + "\nSLQState: " + e.getSQLState()
@@ -160,4 +188,46 @@ public class DAO {
         }
         return (resultado == 1);
     }
+
+    public void cambiarEstado(String idTarea, String estado) {
+        String consulta = "UPDATE tarea SET estado = ? WHERE idTarea = ?;";
+        int resultado = 0;
+        String newContraseña = Hash.calcularHash(contraseña);
+
+        try (Connection conexion = DriverManager.getConnection(
+                "jdbc:mysql://192.168.109.08:3306/proyectofinal", this.usuario, this.contraseña); PreparedStatement ps = conexion.prepareStatement(consulta)) {
+
+            ps.setString(1, estado);
+            ps.setString(2, idTarea);
+
+            resultado = ps.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println("Código de Error: " + e.getErrorCode()
+                    + "\nSLQState: " + e.getSQLState()
+                    + "\nMensaje: " + e.getMessage());
+        }
+    }
+
+    public boolean eliminarTarea(String idTarea) {
+        String consulta = "DELETE FROM tarea WHERE idTarea = ?;";
+        int resultado = 0;
+        String newContraseña = Hash.calcularHash(contraseña);
+
+        try (Connection conexion = DriverManager.getConnection(
+                "jdbc:mysql://192.168.109.08:3306/proyectofinal", this.usuario, this.contraseña); PreparedStatement ps = conexion.prepareStatement(consulta)) {
+
+            ps.setString(1, idTarea);
+
+            resultado = ps.executeUpdate();
+            System.out.println(resultado);
+        } catch (SQLException e) {
+            System.out.println("Código de Error: " + e.getErrorCode()
+                    + "\nSLQState: " + e.getSQLState()
+                    + "\nMensaje: " + e.getMessage());
+        }
+        
+        return (resultado == 1);
+    }
+
 }

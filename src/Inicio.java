@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -34,7 +35,30 @@ public class Inicio extends javax.swing.JFrame {
         } else {
             return 2;
         }
-  
+
+    }
+
+    private void cambioTareas(ArrayList<Tarea> datosTabla) {
+
+        String estado = "";
+
+        for (int i = 0; i < datosTabla.size(); i++) {
+            estado = ((Boolean) tableTareas.getValueAt(i, 0)) ? "hecha" : "activa";
+            conexion.cambiarEstado(Integer.toString(datosTabla.get(i).getIdTarea()), estado);
+        }
+
+        mostrarInfo("Los cambios se han guardado con éxito");
+    }
+
+    private void eliminarTarea(String nombreUsuario, int fila) {
+        ArrayList<Tarea> tareas = conexion.getTareasUsuario(nombreUsuario);
+        boolean correcto = conexion.eliminarTarea(Integer.toString(tareas.get(fila).getIdTarea()));
+        if (correcto) {
+            mostrarInfo("La tarea se elimino correctamente");
+            rellenarTablaTareas(nombreUsuario);
+        } else {
+            mostrarError("La tarea no se elimino con exito");
+        }
     }
 
     private void mostrarError(String text) {
@@ -65,43 +89,38 @@ public class Inicio extends javax.swing.JFrame {
     private void rellenarTablaTareas(String nombreUsuario) {
 
         ArrayList<Tarea> tareas = conexion.getTareasUsuario(nombreUsuario);
-        Object datosTabla[][] = new Object[tareas.size()][4];
+        Object datosTabla[][] = new Object[tareas.size()][3];
 
         for (int i = 0; i < datosTabla.length; i++) {
+
             datosTabla[i][0] = tareas.get(i).isEstadoBol();
             datosTabla[i][1] = tareas.get(i).getTexto();
             datosTabla[i][2] = tareas.get(i).getFechaInicio();
-            datosTabla[i][3] = tareas.get(i).getFechaFin();
+
         }
 
-        tableTareas.setModel(new javax.swing.table.DefaultTableModel(
-                datosTabla,
-                new String[]{
-                    "Estado", "texto", "fecha inicio", "fecha fin"
-                }
-        ));
+        cargarDatos(datosTabla);
+    }
+
+    private void cargarDatos(Object[][] datos) {
+        DefaultTableModel modelo = (DefaultTableModel) tableTareas.getModel();
+        modelo.setDataVector(datos, new Object[]{"estado", "texto", "fecha inicio"});
     }
 
     private void rellenarTablaAdmin(String nombreUsuario) {
 
         ArrayList<Tarea> tareas = conexion.getTareasUsuario(nombreUsuario);
-        Object datosTabla[][] = new Object[tareas.size()][5];
+        Object datosTabla[][] = new Object[tareas.size()][3];
 
         for (int i = 0; i < datosTabla.length; i++) {
 
             datosTabla[i][0] = tareas.get(i).isEstadoBol();
             datosTabla[i][1] = tareas.get(i).getTexto();
             datosTabla[i][2] = tareas.get(i).getFechaInicio();
-            datosTabla[i][3] = tareas.get(i).getFechaFin();
 
         }
 
-        tableTareas.setModel(new javax.swing.table.DefaultTableModel(
-                datosTabla,
-                new String[]{
-                    "usuario", "tipo Usuario"
-                }
-        ));
+        cargarDatos(datosTabla);
     }
 
     /* VISTA */
@@ -138,6 +157,8 @@ public class Inicio extends javax.swing.JFrame {
         usuarioCerrarSesion = new javax.swing.JButton();
         usuarioCambiarAdmin = new javax.swing.JButton();
         botonTarea = new javax.swing.JButton();
+        usuarioGuardarCambios = new javax.swing.JButton();
+        usuarioEliminarTarea = new javax.swing.JButton();
         panelAdmin = new javax.swing.JPanel();
         adminPanelUsuario = new javax.swing.JToggleButton();
         adminTitulo = new javax.swing.JLabel();
@@ -361,7 +382,22 @@ public class Inicio extends javax.swing.JFrame {
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                true, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         usuarioScrollPanel.setViewportView(tableTareas);
 
         usuarioCerrarSesion.setText("Cerrar Sesión");
@@ -385,6 +421,20 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
+        usuarioGuardarCambios.setText("Guardar cambios");
+        usuarioGuardarCambios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usuarioGuardarCambiosActionPerformed(evt);
+            }
+        });
+
+        usuarioEliminarTarea.setText("Eliminar Tarea");
+        usuarioEliminarTarea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usuarioEliminarTareaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelUsuarioLayout = new javax.swing.GroupLayout(panelUsuario);
         panelUsuario.setLayout(panelUsuarioLayout);
         panelUsuarioLayout.setHorizontalGroup(
@@ -402,8 +452,12 @@ public class Inicio extends javax.swing.JFrame {
                         .addComponent(usuarioScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(panelUsuarioLayout.createSequentialGroup()
                             .addComponent(usuarioCerrarSesion)
+                            .addGap(73, 73, 73)
+                            .addComponent(botonTarea)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(botonTarea))))
+                            .addComponent(usuarioEliminarTarea)
+                            .addGap(46, 46, 46)
+                            .addComponent(usuarioGuardarCambios))))
                 .addGap(37, 37, 37))
         );
         panelUsuarioLayout.setVerticalGroup(
@@ -417,10 +471,12 @@ public class Inicio extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addComponent(usuarioScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(usuarioCerrarSesion)
-                    .addComponent(botonTarea))
-                .addContainerGap())
+                    .addComponent(usuarioGuardarCambios)
+                    .addComponent(botonTarea)
+                    .addComponent(usuarioEliminarTarea))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         panel.add(panelUsuario, "panelLista");
@@ -661,6 +717,18 @@ public class Inicio extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_botonAñadirTareasActionPerformed
 
+    private void usuarioGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarioGuardarCambiosActionPerformed
+        String nombre = UsuarioNombre.getText();
+        ArrayList<Tarea> tareas = conexion.getTareasUsuario(nombre);
+        cambioTareas(tareas);
+    }//GEN-LAST:event_usuarioGuardarCambiosActionPerformed
+
+    private void usuarioEliminarTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarioEliminarTareaActionPerformed
+        String nombre = UsuarioNombre.getText();
+        int fila = tableTareas.getSelectedRow();
+        eliminarTarea(nombre, fila);
+    }//GEN-LAST:event_usuarioEliminarTareaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -737,6 +805,8 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel usuario;
     private javax.swing.JButton usuarioCambiarAdmin;
     private javax.swing.JButton usuarioCerrarSesion;
+    private javax.swing.JButton usuarioEliminarTarea;
+    private javax.swing.JButton usuarioGuardarCambios;
     private javax.swing.JScrollPane usuarioScrollPanel;
     // End of variables declaration//GEN-END:variables
 }
