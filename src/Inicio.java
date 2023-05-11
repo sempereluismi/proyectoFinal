@@ -99,10 +99,10 @@ public class Inicio extends javax.swing.JFrame {
 
         }
 
-        cargarDatos(datosTabla);
+        cargarDatosTablaTareas(datosTabla);
     }
 
-    private void cargarDatos(Object[][] datos) {
+    private void cargarDatosTablaTareas(Object[][] datos) {
         DefaultTableModel modelo = (DefaultTableModel) tableTareas.getModel();
         modelo.setDataVector(datos, new Object[]{"estado", "texto", "fecha inicio"});
     }
@@ -120,7 +120,7 @@ public class Inicio extends javax.swing.JFrame {
 
         }
 
-        cargarDatos(datosTabla);
+        cargarDatosTablaTareas(datosTabla);
     }
 
     /* VISTA */

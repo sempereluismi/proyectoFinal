@@ -19,7 +19,7 @@ public class DAO {
     public ArrayList getTareasUsuario(String nombreUsuario) {
         String consulta
                 = "SELECT texto, estado, fechaInicio, idTarea from tarea WHERE idUsuario IN "
-                + "(SELECT idUsuario FROM usuario WHERE nombre =  ?  );";
+                + "(SELECT idUsuario FROM usuario WHERE nombre =  ?  ) ORDER BY estado DESC;";
         ResultSet resultado = null;
         ArrayList<Tarea> tareas = new ArrayList<>();
         try (Connection conexion = DriverManager.getConnection(
