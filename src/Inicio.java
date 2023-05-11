@@ -163,8 +163,7 @@ public class Inicio extends javax.swing.JFrame {
         adminPanelUsuario = new javax.swing.JToggleButton();
         adminTitulo = new javax.swing.JLabel();
         adminScrollPanel = new javax.swing.JScrollPane();
-        adminTabla = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        adminTabla = new javax.swing.JTable();
         panelTareas = new javax.swing.JPanel();
         tareaTitulo = new javax.swing.JLabel();
         tareaTarea = new javax.swing.JLabel();
@@ -491,7 +490,9 @@ public class Inicio extends javax.swing.JFrame {
         adminTitulo.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
         adminTitulo.setText("PANEL DE ADMINISTRADOR");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        adminScrollPanel.setToolTipText("");
+
+        adminTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -502,8 +503,6 @@ public class Inicio extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        adminTabla.setViewportView(jTable1);
-
         adminScrollPanel.setViewportView(adminTabla);
 
         javax.swing.GroupLayout panelAdminLayout = new javax.swing.GroupLayout(panelAdmin);
@@ -768,7 +767,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel UsuarioNombre;
     private javax.swing.JToggleButton adminPanelUsuario;
     private javax.swing.JScrollPane adminScrollPanel;
-    private javax.swing.JScrollPane adminTabla;
+    private javax.swing.JTable adminTabla;
     private javax.swing.JLabel adminTitulo;
     private javax.swing.JButton botonAñadirTareas;
     private javax.swing.JButton botonCrear;
@@ -785,7 +784,6 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JButton iniciarSesion;
     private javax.swing.JTextField iniciarUsuario;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel labelContra;
     private javax.swing.JLabel labelCorreo;
     private javax.swing.JLabel labelFecha;
