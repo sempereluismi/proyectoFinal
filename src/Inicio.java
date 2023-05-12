@@ -60,6 +60,18 @@ public class Inicio extends javax.swing.JFrame {
             mostrarError("La tarea no se elimino con exito");
         }
     }
+    
+    private void eliminarUsuario(int fila) {
+        ArrayList<Usuario> usuarios = conexion.getUsuarios();
+        int idUsuario = usuarios.get(fila).getIdUsuario();
+        boolean eliminasion = conexion.eliminarUsuario(Integer.toString(idUsuario));
+        
+        if(eliminasion) {
+            mostrarInfo("El usuario se ha eliminado correctamente");
+        } else {
+            mostrarError("El usuario no se ha eliminado correctamente");
+        }
+    }
 
     private void mostrarError(String text) {
         JOptionPane.showMessageDialog(this, text, "AVISO", JOptionPane.ERROR_MESSAGE);
@@ -107,21 +119,26 @@ public class Inicio extends javax.swing.JFrame {
         modelo.setDataVector(datos, new Object[]{"estado", "texto", "fecha inicio"});
     }
 
-    private void rellenarTablaAdmin(String nombreUsuario) {
+    private void cargarDatosTablaAdmin(Object[][] datos) {
+        DefaultTableModel modelo = (DefaultTableModel) adminTabla.getModel();
+        modelo.setDataVector(datos, new Object[]{"nombre", "correo", "tipo usuario"});
+    }
 
-        ArrayList<Tarea> tareas = conexion.getTareasUsuario(nombreUsuario);
-        Object datosTabla[][] = new Object[tareas.size()][3];
+    private void rellenarTablaAdmin() {
+        ArrayList<Usuario> usuarios = conexion.getUsuarios();
+        Object datosTabla[][] = new Object[usuarios.size()][3];
 
         for (int i = 0; i < datosTabla.length; i++) {
 
-            datosTabla[i][0] = tareas.get(i).isEstadoBol();
-            datosTabla[i][1] = tareas.get(i).getTexto();
-            datosTabla[i][2] = tareas.get(i).getFechaInicio();
+            datosTabla[i][0] = usuarios.get(i).getNombre();
+            datosTabla[i][1] = usuarios.get(i).getCorreo();
+            datosTabla[i][2] = usuarios.get(i).getTipoUsuario();
 
         }
-
-        cargarDatosTablaTareas(datosTabla);
+       
+        cargarDatosTablaAdmin(datosTabla);
     }
+    
 
     /* VISTA */
     @SuppressWarnings("unchecked")
@@ -164,7 +181,8 @@ public class Inicio extends javax.swing.JFrame {
         adminTitulo = new javax.swing.JLabel();
         adminScrollPanel = new javax.swing.JScrollPane();
         adminTabla = new javax.swing.JTable();
-        eliminarUsuario = new javax.swing.JButton();
+        adminEliminarUsuario = new javax.swing.JButton();
+        adminEditarUsuario = new javax.swing.JButton();
         panelTareas = new javax.swing.JPanel();
         tareaTitulo = new javax.swing.JLabel();
         tareaTarea = new javax.swing.JLabel();
@@ -495,23 +513,33 @@ public class Inicio extends javax.swing.JFrame {
 
         adminTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Title 1", "Title 2", "Title 3"
             }
-        ));
-        adminScrollPanel.setViewportView(adminTabla);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
 
-        eliminarUsuario.setText("Eliminar Usuario");
-        eliminarUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                eliminarUsuarioActionPerformed(evt);
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
+        adminScrollPanel.setViewportView(adminTabla);
+
+        adminEliminarUsuario.setText("Eliminar");
+        adminEliminarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adminEliminarUsuarioActionPerformed(evt);
+            }
+        });
+
+        adminEditarUsuario.setText("Editar");
 
         javax.swing.GroupLayout panelAdminLayout = new javax.swing.GroupLayout(panelAdmin);
         panelAdmin.setLayout(panelAdminLayout);
@@ -523,9 +551,11 @@ public class Inicio extends javax.swing.JFrame {
                     .addComponent(adminScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelAdminLayout.createSequentialGroup()
                         .addComponent(adminTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(79, 79, 79)
-                        .addComponent(eliminarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(adminEliminarUsuario)
+                        .addGap(18, 18, 18)
+                        .addComponent(adminEditarUsuario)
+                        .addGap(18, 18, 18)
                         .addComponent(adminPanelUsuario)))
                 .addContainerGap(94, Short.MAX_VALUE))
         );
@@ -536,11 +566,12 @@ public class Inicio extends javax.swing.JFrame {
                 .addGroup(panelAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(adminPanelUsuario)
-                        .addComponent(eliminarUsuario))
+                        .addComponent(adminEliminarUsuario)
+                        .addComponent(adminEditarUsuario))
                     .addComponent(adminTitulo))
                 .addGap(18, 18, 18)
                 .addComponent(adminScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         panel.add(panelAdmin, "panelAdmin");
@@ -687,6 +718,7 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_usuarioCerrarSesionActionPerformed
 
     private void usuarioCambiarAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarioCambiarAdminActionPerformed
+        rellenarTablaAdmin();
         cambiarVista("panelAdmin");
     }//GEN-LAST:event_usuarioCambiarAdminActionPerformed
 
@@ -740,11 +772,11 @@ public class Inicio extends javax.swing.JFrame {
         eliminarTarea(nombre, fila);
     }//GEN-LAST:event_usuarioEliminarTareaActionPerformed
 
-    private void eliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarUsuarioActionPerformed
-        String nombre = UsuarioNombre.getText();
-        int fila = tableTareas.getSelectedRow();
-        eliminarTarea(nombre, fila);
-    }//GEN-LAST:event_eliminarUsuarioActionPerformed
+    private void adminEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminEliminarUsuarioActionPerformed
+        int fila = adminTabla.getSelectedRow();
+        eliminarUsuario(fila);
+        rellenarTablaAdmin();
+    }//GEN-LAST:event_adminEliminarUsuarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -783,6 +815,8 @@ public class Inicio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel UsuarioNombre;
+    private javax.swing.JButton adminEditarUsuario;
+    private javax.swing.JButton adminEliminarUsuario;
     private javax.swing.JToggleButton adminPanelUsuario;
     private javax.swing.JScrollPane adminScrollPanel;
     private javax.swing.JTable adminTabla;
@@ -798,7 +832,6 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JTextField crearFechaNacimiento;
     private javax.swing.JButton crearInicioSesión;
     private javax.swing.JTextField crearNombreUsuario;
-    private javax.swing.JButton eliminarUsuario;
     private javax.swing.JPasswordField iniciarPassword;
     private javax.swing.JButton iniciarSesion;
     private javax.swing.JTextField iniciarUsuario;

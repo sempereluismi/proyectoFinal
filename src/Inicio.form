@@ -469,9 +469,11 @@
                           <Component id="adminScrollPanel" min="-2" pref="630" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Component id="adminTitulo" min="-2" pref="323" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
-                              <Component id="eliminarUsuario" min="-2" pref="130" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
+                              <Component id="adminEliminarUsuario" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="adminEditarUsuario" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="adminPanelUsuario" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -486,13 +488,14 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="adminPanelUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="eliminarUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="adminEliminarUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="adminEditarUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="adminTitulo" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="adminScrollPanel" min="-2" pref="310" max="-2" attributes="0"/>
-                      <EmptySpace pref="35" max="32767" attributes="0"/>
+                      <EmptySpace pref="38" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -524,24 +527,28 @@
                 <Component class="javax.swing.JTable" name="adminTabla">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="4" rowCount="4">
-                        <Column editable="true" title="Title 1" type="java.lang.Object"/>
-                        <Column editable="true" title="Title 2" type="java.lang.Object"/>
-                        <Column editable="true" title="Title 3" type="java.lang.Object"/>
-                        <Column editable="true" title="Title 4" type="java.lang.Object"/>
+                      <Table columnCount="3" rowCount="4">
+                        <Column editable="false" title="Title 1" type="java.lang.Object"/>
+                        <Column editable="false" title="Title 2" type="java.lang.Object"/>
+                        <Column editable="false" title="Title 3" type="java.lang.Object"/>
                       </Table>
                     </Property>
                   </Properties>
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JButton" name="eliminarUsuario">
+            <Component class="javax.swing.JButton" name="adminEliminarUsuario">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Eliminar Usuario"/>
+                <Property name="text" type="java.lang.String" value="Eliminar"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="eliminarUsuarioActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="adminEliminarUsuarioActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="adminEditarUsuario">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Editar"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

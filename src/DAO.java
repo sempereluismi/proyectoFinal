@@ -44,6 +44,28 @@ public class DAO {
         return tareas;
     }
 
+    public ArrayList getUsuarios() {
+        String consulta
+                = "SELECT idUsuario, nombre, correo, tipoUsuario FROM usuario ORDER BY tipoUsuario DESC;";
+        ResultSet resultado = null;
+        ArrayList<Usuario> usuarios = new ArrayList<>();
+        try (Connection conexion = DriverManager.getConnection(
+                "jdbc:mysql://192.168.109.08:3306/proyectofinal", this.usuario, this.contraseña); PreparedStatement ps = conexion.prepareStatement(consulta)) {
+
+            resultado = ps.executeQuery();
+
+            while (resultado.next()) {
+                usuarios.add(new Usuario(resultado.getInt(1), resultado.getString(2), resultado.getString(3), resultado.getString(4)));
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Código de Error: " + e.getErrorCode()
+                    + "\nSLQState: " + e.getSQLState()
+                    + "\nMensaje: " + e.getMessage());
+        }
+        return usuarios;
+    }
+
     /**
      * Sirve para que los usuarios puedan iniciar sesion si han creado su cuenta
      */
@@ -156,7 +178,8 @@ public class DAO {
     }
 
     /**
-     * Manda un mensaje de error en caso de que se intente crear un usuario que ya exista en la base de datos.
+     * Manda un mensaje de error en caso de que se intente crear un usuario que
+     * ya exista en la base de datos.
      */
     private boolean comprobarTextoRepetido(String nombreUsuario, String texto) {
         String idUsuario = Integer.toString(getIdUsuario(nombreUsuario));
@@ -239,7 +262,6 @@ public class DAO {
     public boolean eliminarTarea(String idTarea) {
         String consulta = "DELETE FROM tarea WHERE idTarea = ?;";
         int resultado = 0;
-        String newContraseña = Hash.calcularHash(contraseña);
 
         try (Connection conexion = DriverManager.getConnection(
                 "jdbc:mysql://192.168.109.08:3306/proyectofinal", this.usuario, this.contraseña); PreparedStatement ps = conexion.prepareStatement(consulta)) {
@@ -247,13 +269,56 @@ public class DAO {
             ps.setString(1, idTarea);
 
             resultado = ps.executeUpdate();
-            System.out.println(resultado);
         } catch (SQLException e) {
             System.out.println("Código de Error: " + e.getErrorCode()
                     + "\nSLQState: " + e.getSQLState()
                     + "\nMensaje: " + e.getMessage());
         }
+
+        return (resultado == 1);
+    }
+
+    private boolean eliminarTareasDeUnUsuario(String idUsuario) {
+        String consulta = "DELETE FROM tarea WHERE idUsuario = ?;";
+        int resultado = 0;
+
+        try (Connection conexion = DriverManager.getConnection(
+                "jdbc:mysql://192.168.109.08:3306/proyectofinal", this.usuario, this.contraseña); PreparedStatement ps = conexion.prepareStatement(consulta)) {
+
+            ps.setString(1, idUsuario);
+
+            resultado = ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Código de Error: " + e.getErrorCode()
+                    + "\nSLQState: " + e.getSQLState()
+                    + "\nMensaje: " + e.getMessage());
+        }
+
+        return (resultado == 1);
+    }
+
+    public boolean eliminarUsuario(String idUsuario) {
+        boolean elimincacionCorrecta = eliminarTareasDeUnUsuario(idUsuario);
         
+        if(!elimincacionCorrecta) {
+            return false;
+        }
+        
+        String consulta = "DELETE FROM usuario WHERE idUsuario = ?;";
+        int resultado = 0;
+
+        try (Connection conexion = DriverManager.getConnection(
+                "jdbc:mysql://192.168.109.08:3306/proyectofinal", this.usuario, this.contraseña); PreparedStatement ps = conexion.prepareStatement(consulta)) {
+
+            ps.setString(1, idUsuario);
+
+            resultado = ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Código de Error: " + e.getErrorCode()
+                    + "\nSLQState: " + e.getSQLState()
+                    + "\nMensaje: " + e.getMessage());
+        }
+
         return (resultado == 1);
     }
 
