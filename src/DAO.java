@@ -278,7 +278,7 @@ public class DAO {
         return (resultado == 1);
     }
 
-    private boolean eliminarTareasDeUnUsuario(String idUsuario) {
+    private void eliminarTareasDeUnUsuario(String idUsuario) {
         String consulta = "DELETE FROM tarea WHERE idUsuario = ?;";
         int resultado = 0;
 
@@ -294,15 +294,10 @@ public class DAO {
                     + "\nMensaje: " + e.getMessage());
         }
 
-        return (resultado == 1);
     }
 
     public boolean eliminarUsuario(String idUsuario) {
-        boolean elimincacionCorrecta = eliminarTareasDeUnUsuario(idUsuario);
-        
-        if(!elimincacionCorrecta) {
-            return false;
-        }
+        eliminarTareasDeUnUsuario(idUsuario);
         
         String consulta = "DELETE FROM usuario WHERE idUsuario = ?;";
         int resultado = 0;
