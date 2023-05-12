@@ -164,6 +164,7 @@ public class Inicio extends javax.swing.JFrame {
         adminTitulo = new javax.swing.JLabel();
         adminScrollPanel = new javax.swing.JScrollPane();
         adminTabla = new javax.swing.JTable();
+        eliminarUsuario = new javax.swing.JButton();
         panelTareas = new javax.swing.JPanel();
         tareaTitulo = new javax.swing.JLabel();
         tareaTarea = new javax.swing.JLabel();
@@ -505,6 +506,13 @@ public class Inicio extends javax.swing.JFrame {
         ));
         adminScrollPanel.setViewportView(adminTabla);
 
+        eliminarUsuario.setText("Eliminar Usuario");
+        eliminarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarUsuarioActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelAdminLayout = new javax.swing.GroupLayout(panelAdmin);
         panelAdmin.setLayout(panelAdminLayout);
         panelAdminLayout.setHorizontalGroup(
@@ -515,6 +523,8 @@ public class Inicio extends javax.swing.JFrame {
                     .addComponent(adminScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelAdminLayout.createSequentialGroup()
                         .addComponent(adminTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(79, 79, 79)
+                        .addComponent(eliminarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(adminPanelUsuario)))
                 .addContainerGap(94, Short.MAX_VALUE))
@@ -524,7 +534,9 @@ public class Inicio extends javax.swing.JFrame {
             .addGroup(panelAdminLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(panelAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(adminPanelUsuario)
+                    .addGroup(panelAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(adminPanelUsuario)
+                        .addComponent(eliminarUsuario))
                     .addComponent(adminTitulo))
                 .addGap(18, 18, 18)
                 .addComponent(adminScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -605,7 +617,7 @@ public class Inicio extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, 411, Short.MAX_VALUE))
+                .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -728,6 +740,12 @@ public class Inicio extends javax.swing.JFrame {
         eliminarTarea(nombre, fila);
     }//GEN-LAST:event_usuarioEliminarTareaActionPerformed
 
+    private void eliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarUsuarioActionPerformed
+        String nombre = UsuarioNombre.getText();
+        int fila = tableTareas.getSelectedRow();
+        eliminarTarea(nombre, fila);
+    }//GEN-LAST:event_eliminarUsuarioActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -780,6 +798,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JTextField crearFechaNacimiento;
     private javax.swing.JButton crearInicioSesión;
     private javax.swing.JTextField crearNombreUsuario;
+    private javax.swing.JButton eliminarUsuario;
     private javax.swing.JPasswordField iniciarPassword;
     private javax.swing.JButton iniciarSesion;
     private javax.swing.JTextField iniciarUsuario;

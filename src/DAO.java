@@ -16,6 +16,9 @@ public class DAO {
         this.contraseña = contraseña;
     }
 
+    /**
+     * Coge las tareas para ponerlas en la lista de tareas
+     */
     public ArrayList getTareasUsuario(String nombreUsuario) {
         String consulta
                 = "SELECT texto, estado, fechaInicio, idTarea from tarea WHERE idUsuario IN "
@@ -41,6 +44,9 @@ public class DAO {
         return tareas;
     }
 
+    /**
+     * Sirve para que los usuarios puedan iniciar sesion si han creado su cuenta
+     */
     public boolean inicioSesión(String nombreUsuario, String contraseña) {
 
         String consulta
@@ -70,6 +76,9 @@ public class DAO {
         return true;
     }
 
+    /**
+     * Sirve para indicar la creación de una nueva entrada en la tabla usuario.
+     */
     public boolean crearUsuario(String nombreUsuario, String contraseña, String correo, String fechaNacimiento) {
         String consulta = "INSERT INTO usuario ( nombre, contrasena, correo, fechaNacimiento ) values (?, ?, ?, ?);";
         int resultado = 0;
@@ -94,6 +103,9 @@ public class DAO {
         return (resultado == 1);
     }
 
+    /**
+     * Sirve para saber si el usuario es normal o administrador.
+     */
     public String getTipoUsuario(String nombreUsuario) {
         String consulta = "SELECT tipoUsuario FROM usuario WHERE nombre = ?;";
         ResultSet resultado = null;
@@ -117,6 +129,9 @@ public class DAO {
         return tipoUsuario;
     }
 
+    /**
+     * Comprueba el ID del usuario.
+     */
     public int getIdUsuario(String nombreUsuario) {
         String consulta = "SELECT idUsuario FROM usuario WHERE nombre = ?;";
         ResultSet resultado = null;
@@ -140,6 +155,9 @@ public class DAO {
         return idUsuario;
     }
 
+    /**
+     * Manda un mensaje de error en caso de que se intente crear un usuario que ya exista en la base de datos.
+     */
     private boolean comprobarTextoRepetido(String nombreUsuario, String texto) {
         String idUsuario = Integer.toString(getIdUsuario(nombreUsuario));
         String consulta = "SELECT texto FROM tarea WHERE idUsuario = ?;";
@@ -165,6 +183,9 @@ public class DAO {
         return true;
     }
 
+    /**
+     * Añade una tarea nueva que el usuario cree a su lista de tareas.
+     */
     public boolean insertTarea(String nombreUsuario, String texto) {
         String idUsuario = Integer.toString(getIdUsuario(nombreUsuario));
         String consulta = "INSERT INTO tarea ( idUsuario, texto, fechaInicio ) values (?, ?, now());";
@@ -189,6 +210,9 @@ public class DAO {
         return (resultado == 1);
     }
 
+    /**
+     * Cambia el estado de las tareas de activa a hecha y viceversa.
+     */
     public void cambiarEstado(String idTarea, String estado) {
         String consulta = "UPDATE tarea SET estado = ? WHERE idTarea = ?;";
         int resultado = 0;
@@ -209,6 +233,9 @@ public class DAO {
         }
     }
 
+    /**
+     * Elimina las tareas del usuario que este seleccione.
+     */
     public boolean eliminarTarea(String idTarea) {
         String consulta = "DELETE FROM tarea WHERE idTarea = ?;";
         int resultado = 0;
