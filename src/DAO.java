@@ -298,7 +298,7 @@ public class DAO {
 
     public boolean eliminarUsuario(String idUsuario) {
         eliminarTareasDeUnUsuario(idUsuario);
-        
+
         String consulta = "DELETE FROM usuario WHERE idUsuario = ?;";
         int resultado = 0;
 
@@ -314,6 +314,32 @@ public class DAO {
                     + "\nMensaje: " + e.getMessage());
         }
 
+        return (resultado == 1);
+    }
+
+    public boolean editarUsuario(String idUsuario, String nombre, String correo, String tipoUsuario) {
+        String consulta = "UPDATE usuario SET nombre = ?,"
+                + "correo = ?,"
+                + "tipoUsuario = ?"
+                + "WHERE idUsuario = ?;";
+        int resultado = 0;
+
+        try (Connection conexion = DriverManager.getConnection(
+                "jdbc:mysql://192.168.109.08:3306/proyectofinal", this.usuario, this.contraseña); PreparedStatement ps = conexion.prepareStatement(consulta)) {
+
+            ps.setString(1, nombre);
+            ps.setString(2, correo);
+            ps.setString(3, tipoUsuario);
+            ps.setString(4, idUsuario);
+
+            resultado = ps.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println("Código de Error: " + e.getErrorCode()
+                    + "\nSLQState: " + e.getSQLState()
+                    + "\nMensaje: " + e.getMessage());
+        }
+        
         return (resultado == 1);
     }
 

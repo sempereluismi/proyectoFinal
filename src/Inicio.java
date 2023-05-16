@@ -38,6 +38,10 @@ public class Inicio extends javax.swing.JFrame {
 
     }
 
+    private boolean actualizarUsuario(String idUsuario, String nombre, String correo, String tipoUsuario) {
+        return conexion.editarUsuario(idUsuario, nombre, correo, tipoUsuario);
+    }
+
     private void cambioTareas(ArrayList<Tarea> datosTabla) {
 
         String estado = "";
@@ -60,17 +64,21 @@ public class Inicio extends javax.swing.JFrame {
             mostrarError("La tarea no se elimino con exito");
         }
     }
-    
+
     private void eliminarUsuario(int fila) {
-        ArrayList<Usuario> usuarios = conexion.getUsuarios();
-        int idUsuario = usuarios.get(fila).getIdUsuario();
+        int idUsuario = getIdUsuario(fila);
         boolean eliminasion = conexion.eliminarUsuario(Integer.toString(idUsuario));
-        
-        if(eliminasion) {
+
+        if (eliminasion) {
             mostrarInfo("El usuario se ha eliminado correctamente");
         } else {
             mostrarError("El usuario no se ha eliminado correctamente");
         }
+    }
+
+    private int getIdUsuario(int fila) {
+        ArrayList<Usuario> usuarios = conexion.getUsuarios();
+        return usuarios.get(fila).getIdUsuario();
     }
 
     private void mostrarError(String text) {
@@ -135,10 +143,15 @@ public class Inicio extends javax.swing.JFrame {
             datosTabla[i][2] = usuarios.get(i).getTipoUsuario();
 
         }
-       
+
         cargarDatosTablaAdmin(datosTabla);
     }
-    
+
+    private Usuario getUsuario(int fila) {
+        ArrayList<Usuario> usuarios = conexion.getUsuarios();
+        return usuarios.get(fila);
+    }
+
 
     /* VISTA */
     @SuppressWarnings("unchecked")
@@ -189,6 +202,17 @@ public class Inicio extends javax.swing.JFrame {
         tareaTexto = new javax.swing.JTextField();
         botonSalirTarea = new javax.swing.JButton();
         botonAñadirTareas = new javax.swing.JButton();
+        panelEditarUsuarios = new javax.swing.JPanel();
+        adminTitulo1 = new javax.swing.JLabel();
+        usuarioVolver = new javax.swing.JButton();
+        usuarioGuardar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        usuarioNombre = new javax.swing.JTextField();
+        usuarioCorreo = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        usuarioTipoUsuario = new javax.swing.JComboBox<>();
+        usuarioFila = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -540,6 +564,11 @@ public class Inicio extends javax.swing.JFrame {
         });
 
         adminEditarUsuario.setText("Editar");
+        adminEditarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adminEditarUsuarioActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelAdminLayout = new javax.swing.GroupLayout(panelAdmin);
         panelAdmin.setLayout(panelAdminLayout);
@@ -637,6 +666,97 @@ public class Inicio extends javax.swing.JFrame {
         );
 
         panel.add(panelTareas, "panelTareas");
+
+        adminTitulo1.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
+        adminTitulo1.setText("EDITAR USUARIO");
+
+        usuarioVolver.setText("Volver");
+        usuarioVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usuarioVolverActionPerformed(evt);
+            }
+        });
+
+        usuarioGuardar.setText("Guardar Cambios");
+        usuarioGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usuarioGuardarActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("nombre");
+
+        jLabel2.setText("correo");
+
+        jLabel3.setText("Tipo Usuario");
+
+        usuarioTipoUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "usuario", "administrador" }));
+        usuarioTipoUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usuarioTipoUsuarioActionPerformed(evt);
+            }
+        });
+
+        usuarioFila.setText("jLabel5");
+
+        javax.swing.GroupLayout panelEditarUsuariosLayout = new javax.swing.GroupLayout(panelEditarUsuarios);
+        panelEditarUsuarios.setLayout(panelEditarUsuariosLayout);
+        panelEditarUsuariosLayout.setHorizontalGroup(
+            panelEditarUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelEditarUsuariosLayout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addGroup(panelEditarUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelEditarUsuariosLayout.createSequentialGroup()
+                        .addComponent(adminTitulo1, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
+                        .addComponent(usuarioGuardar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(usuarioVolver))
+                    .addGroup(panelEditarUsuariosLayout.createSequentialGroup()
+                        .addGroup(panelEditarUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addGap(83, 83, 83)
+                        .addGroup(panelEditarUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(usuarioCorreo)
+                            .addComponent(usuarioNombre)))
+                    .addGroup(panelEditarUsuariosLayout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(51, 51, 51)
+                        .addComponent(usuarioTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(30, 30, 30))
+            .addGroup(panelEditarUsuariosLayout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addComponent(usuarioFila)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelEditarUsuariosLayout.setVerticalGroup(
+            panelEditarUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelEditarUsuariosLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(panelEditarUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(adminTitulo1)
+                    .addComponent(usuarioVolver)
+                    .addComponent(usuarioGuardar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(usuarioFila)
+                .addGap(76, 76, 76)
+                .addGroup(panelEditarUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(usuarioNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addGroup(panelEditarUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(usuarioCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36)
+                .addGroup(panelEditarUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(usuarioTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(123, Short.MAX_VALUE))
+        );
+
+        panel.add(panelEditarUsuarios, "panelEditarUsuarios");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -778,6 +898,43 @@ public class Inicio extends javax.swing.JFrame {
         rellenarTablaAdmin();
     }//GEN-LAST:event_adminEliminarUsuarioActionPerformed
 
+    private void usuarioGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarioGuardarActionPerformed
+
+        String nombre = usuarioNombre.getText();
+        String correo = usuarioCorreo.getText();
+        String tipoUsuario = (String) usuarioTipoUsuario.getSelectedItem();
+        int idUsuario = getIdUsuario(Integer.parseInt(usuarioFila.getText()));
+
+        boolean updateCorrecto = actualizarUsuario(Integer.toString(idUsuario), nombre, correo, tipoUsuario);
+
+        if (updateCorrecto) {
+            mostrarInfo("Los valores del usuario se actualizaron con éxito");
+            cambiarVista("panelAdmin");
+        } else {
+            mostrarError("Hubo un error al actualizar los valores del usuario");
+        }
+    }//GEN-LAST:event_usuarioGuardarActionPerformed
+
+    private void usuarioTipoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarioTipoUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_usuarioTipoUsuarioActionPerformed
+
+    private void adminEditarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminEditarUsuarioActionPerformed
+        int fila = adminTabla.getSelectedRow();
+        Usuario user = getUsuario(fila);
+        int idxTipo = (user.getTipoUsuario().equals("usuario")) ? 0 : 1;
+        usuarioNombre.setText(user.getNombre());
+        usuarioCorreo.setText(user.getCorreo());
+        usuarioTipoUsuario.setSelectedIndex(idxTipo);
+        usuarioFila.setText(Integer.toString(fila));
+        usuarioFila.setVisible(false);
+        cambiarVista("panelEditarUsuarios");
+    }//GEN-LAST:event_adminEditarUsuarioActionPerformed
+
+    private void usuarioVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarioVolverActionPerformed
+        cambiarVista("panelAdmin");
+    }//GEN-LAST:event_usuarioVolverActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -821,6 +978,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JScrollPane adminScrollPanel;
     private javax.swing.JTable adminTabla;
     private javax.swing.JLabel adminTitulo;
+    private javax.swing.JLabel adminTitulo1;
     private javax.swing.JButton botonAñadirTareas;
     private javax.swing.JButton botonCrear;
     private javax.swing.JButton botonSalirTarea;
@@ -835,6 +993,9 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JPasswordField iniciarPassword;
     private javax.swing.JButton iniciarSesion;
     private javax.swing.JTextField iniciarUsuario;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel labelContra;
     private javax.swing.JLabel labelCorreo;
@@ -843,6 +1004,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JPanel panel;
     private javax.swing.JPanel panelAdmin;
     private javax.swing.JPanel panelCuenta;
+    private javax.swing.JPanel panelEditarUsuarios;
     private javax.swing.JPanel panelInicio;
     private javax.swing.JPanel panelTareas;
     private javax.swing.JPanel panelUsuario;
@@ -855,8 +1017,14 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel usuario;
     private javax.swing.JButton usuarioCambiarAdmin;
     private javax.swing.JButton usuarioCerrarSesion;
+    private javax.swing.JTextField usuarioCorreo;
     private javax.swing.JButton usuarioEliminarTarea;
+    private javax.swing.JLabel usuarioFila;
+    private javax.swing.JButton usuarioGuardar;
     private javax.swing.JButton usuarioGuardarCambios;
+    private javax.swing.JTextField usuarioNombre;
     private javax.swing.JScrollPane usuarioScrollPanel;
+    private javax.swing.JComboBox<String> usuarioTipoUsuario;
+    private javax.swing.JButton usuarioVolver;
     // End of variables declaration//GEN-END:variables
 }
