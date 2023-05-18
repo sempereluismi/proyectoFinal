@@ -909,6 +909,7 @@ public class Inicio extends javax.swing.JFrame {
 
         if (updateCorrecto) {
             mostrarInfo("Los valores del usuario se actualizaron con éxito");
+            rellenarTablaAdmin();
             cambiarVista("panelAdmin");
         } else {
             mostrarError("Hubo un error al actualizar los valores del usuario");
